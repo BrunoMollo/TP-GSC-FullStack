@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "7NEeDJWnttYIJAwPKzoYhzffRPW2wp7gDXf9BkTKqyU=",
+  "Source": "TP-GSC-API",
+  "BasePath": "_content/TP-GSC-API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
