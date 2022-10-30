@@ -6,19 +6,20 @@
 	},
 	"item": [
 		{
-			"name": "forecast",
+			"name": "/categories",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44382/WeatherForecast",
+					"raw": "https://localhost:7193/api/categories",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "44382",
+					"port": "7193",
 					"path": [
-						"WeatherForecast"
+						"api",
+						"categories"
 					]
 				}
 			},

@@ -1,11 +1,34 @@
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using TP_GSC_BackEnd.Data_Access;
+using TP_GSC_BackEnd.Data_Access.CategoryData;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddControllers()
+    .AddJsonOptions(x =>
+    {
+        x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    }
+);
+builder.Services.AddDbContext<LoanDBContext>(
+    options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LoansContextConnection"))
+);
+
+
+
 builder.Services.AddRazorPages();
+
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
+
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
@@ -25,5 +48,7 @@ app.MapRazorPages();
 app.MapControllerRoute(
        name: "default",
        pattern: "{controller}/{action=Index}/{id?}");
+
+
 
 app.Run();

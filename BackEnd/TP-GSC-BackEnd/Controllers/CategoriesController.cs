@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TP_GSC_BackEnd.Data_Access.CategoryData;
 
 namespace TP_GSC_BackEnd.Controllers
 {
@@ -7,9 +8,15 @@ namespace TP_GSC_BackEnd.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
+        private readonly ICategoryRepository categoryRepo;
+        public CategoriesController(ICategoryRepository categoryRepo) 
+        {
+            this.categoryRepo = categoryRepo;
+        }
+
 
         [HttpGet]
-        public IActionResult getCategories() => Ok(new List<int> { 1, 2, 3 });
+        public IActionResult getCategories() => Ok(categoryRepo.GetAll());
 
     }
 }
