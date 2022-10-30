@@ -25,11 +25,25 @@ namespace TP_GSC_BackEnd.Data_Access
             modelBuilder.Entity<Category>()
                 .Property(c => c.CreationDate)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
-               
-                
+
+
+
+            modelBuilder.Entity<Person>()
+                .Property(p => p.Name)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Person>()
+                .Property(p => p.Email)
+                .HasMaxLength(320);
+
+            modelBuilder.Entity<Person>()
+                .Property(p => p.PhoneNumber)
+                .HasMaxLength(20);
+    
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Person> People { get; set;  }
 
     }
 }

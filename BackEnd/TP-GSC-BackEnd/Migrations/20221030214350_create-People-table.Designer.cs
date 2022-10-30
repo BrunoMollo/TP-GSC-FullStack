@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TP_GSC_BackEnd.Data_Access;
 
@@ -11,9 +12,10 @@ using TP_GSC_BackEnd.Data_Access;
 namespace TP_GSC_BackEnd.Migrations
 {
     [DbContext(typeof(LoanDBContext))]
-    partial class LoanDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221030214350_create-People-table")]
+    partial class createPeopletable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

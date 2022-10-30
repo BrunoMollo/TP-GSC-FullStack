@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using TP_GSC_BackEnd.Data_Access;
 using TP_GSC_BackEnd.Data_Access.CategoryData;
+using TP_GSC_BackEnd.Data_Access.PersonData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ builder.Services.AddRazorPages();
 
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 
 var app = builder.Build();
 
