@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 using TP_GSC_BackEnd.Entities;
 
 #nullable disable
@@ -16,6 +17,12 @@ namespace TP_GSC_BackEnd.Data_Access
             modelBuilder.Entity<Category>()
                 .Property(c => c.Description)
                 .HasMaxLength(100);
+
+            modelBuilder.Entity<Category>()
+                .Property(c => c.CreationDate)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
+               
+                
         }
 
         public DbSet<Category> Categories { get; set; }

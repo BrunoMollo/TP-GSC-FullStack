@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using TP_GSC_BackEnd.Data_Access.Generic;
+using TP_GSC_BackEnd.Extension_Methods;
 
 namespace TP_GSC_BackEnd.Entities
 {
@@ -14,6 +16,15 @@ namespace TP_GSC_BackEnd.Entities
 
         public Category(string description) { 
             this.Description = description;
+        }
+
+
+        public bool hasValidDescription() 
+        {
+            if (Description.Length.isBetweenExcluding(2, 100))
+                return true;
+            else
+                return false;
         }
 
     }

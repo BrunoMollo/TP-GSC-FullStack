@@ -9,7 +9,7 @@ namespace TP_GSC_BackEnd.Data_Access
 
         public List<T> GetAll();
 
-        public void insert(T entity);
+        public void add(T entity);
 
         public void update(T entity);
     }
