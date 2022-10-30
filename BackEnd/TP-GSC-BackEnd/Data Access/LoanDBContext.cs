@@ -19,6 +19,10 @@ namespace TP_GSC_BackEnd.Data_Access
                 .HasMaxLength(100);
 
             modelBuilder.Entity<Category>()
+                .HasIndex(c => c.Description)
+                .IsUnique();
+
+            modelBuilder.Entity<Category>()
                 .Property(c => c.CreationDate)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
                

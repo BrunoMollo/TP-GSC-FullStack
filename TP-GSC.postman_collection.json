@@ -24,6 +24,35 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "/categories",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Description\": \"nueva categoria\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7193/api/categories",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7193",
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
