@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using TP_GSC_BackEnd.Data_Access.CategoryData;
+using TP_GSC_BackEnd.Data_Access.Uow;
 using TP_GSC_BackEnd.Entities;
 
 namespace TP_GSC_BackEnd.Controllers
@@ -11,15 +12,15 @@ namespace TP_GSC_BackEnd.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ICategoryRepository categoryRepo;
-        public CategoriesController(ICategoryRepository categoryRepo) 
+        private readonly IUnitOfWork Uow;
+        public CategoriesController(IUnitOfWork uow) 
         {
-            this.categoryRepo = categoryRepo;
+            this.Uow = uow;
         }
 
 
         [HttpGet]
-        public IActionResult getCategories() => Ok(categoryRepo.GetAll());
+        public IActionResult getCategories() => Ok(Uow.CategoryRepo.GetAll());
 
 
         [HttpPost]
@@ -30,8 +31,9 @@ namespace TP_GSC_BackEnd.Controllers
 
             try
             {
-                categoryRepo.add(newCategory);
-                return Ok();
+                newCategory=Uow.CategoryRepo.add(newCategory);
+                Uow.Complete();
+                return Created("created: ",newCategory);
             }
             catch (DbUpdateException ex) 
             {

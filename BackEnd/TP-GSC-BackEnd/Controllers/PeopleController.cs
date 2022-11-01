@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using TP_GSC_BackEnd.Data_Access.CategoryData;
-using TP_GSC_BackEnd.Data_Access.PersonData;
+﻿using Microsoft.AspNetCore.Mvc;
+using TP_GSC_BackEnd.Data_Access.Uow;
 using TP_GSC_BackEnd.Entities;
 
 namespace TP_GSC_BackEnd.Controllers
@@ -10,20 +8,20 @@ namespace TP_GSC_BackEnd.Controllers
     [ApiController]
     public class PeopleController : ControllerBase
     {
-        private readonly IPersonRepository peopleRepo;
-        public PeopleController(IPersonRepository peopleRepo)
+        private readonly IUnitOfWork Uow;
+        public PeopleController(IUnitOfWork Uow)
         {
-            this.peopleRepo = peopleRepo;
+            this.Uow = Uow;
         }
 
 
         [HttpGet]
-        public IActionResult getAllPeople() => Ok(peopleRepo.GetAll());
+        public IActionResult getAllPeople() => Ok(Uow.PeopleRepo.GetAll());
 
         [HttpGet("{id}")]
         public IActionResult getOnePerson(int id)
         {
-            var person = peopleRepo.GetOne(id);
+            var person = Uow.PeopleRepo.GetOne(id);
 
             if(person == null)
                 return NotFound();
@@ -33,8 +31,9 @@ namespace TP_GSC_BackEnd.Controllers
 
         [HttpPost]
         public IActionResult createPerson([FromBody]Person newPerson) {
-            peopleRepo.add(newPerson);
-            return Ok();
+            newPerson=Uow.PeopleRepo.add(newPerson);
+            Uow.Complete();
+            return Created("nice", newPerson);
         }
 
 

@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using TP_GSC_BackEnd.Data_Access;
 using TP_GSC_BackEnd.Data_Access.CategoryData;
 using TP_GSC_BackEnd.Data_Access.PersonData;
+using TP_GSC_BackEnd.Data_Access.Uow;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,9 +23,7 @@ builder.Services.AddDbContext<LoanDBContext>(
 
 builder.Services.AddRazorPages();
 
-
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

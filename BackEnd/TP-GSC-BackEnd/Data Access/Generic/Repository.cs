@@ -27,15 +27,14 @@ namespace TP_GSC_BackEnd.Data_Access
             return dbSet.FirstOrDefault(x => x.Id == id);
         }
 
-        public void add(T entity)
+        public T add(T entity)
         {
-            dbSet.Add(entity);
-            context.SaveChanges();
+            return dbSet.Add(entity).Entity;
         }
 
-        public void update(T entity)
+        public T update(T entity)
         {
-            dbSet.Update(entity);//??
+            return dbSet.Update(entity).Entity;
         }
     }
 }
