@@ -9,9 +9,14 @@ namespace TP_GSC_BackEnd.Data_Access
 
         public List<T> GetAll();
 
+        public List<T> GetAll(Func<T, bool> condition);
+
         public T add(T entity);
 
         public T update(T entity);
+
+        public void Delete(T entity);
+
 
 
     }

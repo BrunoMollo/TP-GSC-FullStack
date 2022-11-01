@@ -17,24 +17,35 @@ namespace TP_GSC_BackEnd.Data_Access
             dbSet = context.Set<T>();
         }
 
-        public List<T> GetAll()
+        virtual public List<T> GetAll()
         {
             return dbSet.ToList();
         }
 
-        public T? GetOne(int id)
+        virtual public List<T> GetAll(Func<T,bool> condition)
+        {
+            return dbSet.Where(condition).ToList();
+        }
+
+        virtual public T? GetOne(int id)
         {
             return dbSet.FirstOrDefault(x => x.Id == id);
         }
 
-        public T add(T entity)
+        virtual public T add(T entity)
         {
             return dbSet.Add(entity).Entity;
         }
 
-        public T update(T entity)
+        virtual public T update(T entity)
         {
             return dbSet.Update(entity).Entity;
         }
+
+        virtual public void Delete(T entity) 
+        {
+            dbSet.Remove(entity);
+        }
+
     }
 }

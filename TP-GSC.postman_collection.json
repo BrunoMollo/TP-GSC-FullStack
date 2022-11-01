@@ -26,13 +26,83 @@
 			"response": []
 		},
 		{
+			"name": "/People",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7193/api/people",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7193",
+					"path": [
+						"api",
+						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/People/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7193/api/people/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7193",
+					"path": [
+						"api",
+						"people",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/People",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\":\"Marcos\",\r\n    \"PhoneNumber\":\"3364153346\",\r\n    \"Email\":\"marcos@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7193/api/people",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7193",
+					"path": [
+						"api",
+						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "/categories",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"Description\": \"nueva categoria\"\r\n}",
+					"raw": "{\r\n    \"Description\": \"mi cat\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

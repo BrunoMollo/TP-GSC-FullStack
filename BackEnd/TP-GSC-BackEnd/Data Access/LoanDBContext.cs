@@ -39,11 +39,26 @@ namespace TP_GSC_BackEnd.Data_Access
             modelBuilder.Entity<Person>()
                 .Property(p => p.PhoneNumber)
                 .HasMaxLength(20);
-    
+
+
+
+            modelBuilder.Entity<Thing>()
+                .Property(t => t.Description)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Thing>()
+              .Property(t => t.CreationDate)
+              .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+            modelBuilder.Entity<Thing>()
+             .HasOne(t => t.Category);
+
+
         }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Person> People { get; set;  }
+        public DbSet<Thing> Things { get; set; }
 
     }
 }
