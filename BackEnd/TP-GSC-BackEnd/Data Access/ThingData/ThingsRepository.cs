@@ -11,7 +11,16 @@ namespace TP_GSC_BackEnd.Data_Access.ThingData
 
         public override List<Thing> GetAll()
         {
-            return dbSet.Include(t=>t.Category).ToList();
+            return dbSet
+                .Include(t=>t.Category)
+                .ToList();
+        }
+
+        public override Thing? GetOne(int id)
+        {
+            return dbSet
+                .Include(t => t.Category)
+                .FirstOrDefault(t => t.Id == id);
         }
     }
 }
