@@ -3,7 +3,7 @@ using TP_GSC_BackEnd.Data_Access.Uow;
 using TP_GSC_BackEnd.Dto;
 using TP_GSC_BackEnd.Entities;
 
-namespace TP_GSC_BackEnd.Controllers
+namespace TP_GSC_BackEnd.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -11,8 +11,9 @@ namespace TP_GSC_BackEnd.Controllers
     {
         private readonly IUnitOfWork Uow;
 
-        public ThingsController(IUnitOfWork uow) {
-            this.Uow = uow;
+        public ThingsController(IUnitOfWork uow)
+        {
+            Uow = uow;
         }
 
 
@@ -20,14 +21,14 @@ namespace TP_GSC_BackEnd.Controllers
         [HttpGet]
         public IActionResult getAllThings()
         {
-            return Ok(Uow.ThingsRepo.GetAll().Select(t=>createShowDto(t)));
+            return Ok(Uow.ThingsRepo.GetAll().Select(t => createShowDto(t)));
         }
 
 
         [HttpGet("{id}")]
-        public IActionResult GetThingById(int id) 
+        public IActionResult GetThingById(int id)
         {
-            var thing=Uow.ThingsRepo.GetOne(id);
+            var thing = Uow.ThingsRepo.GetOne(id);
             if (thing is null)
                 return NotFound();
 
@@ -36,21 +37,23 @@ namespace TP_GSC_BackEnd.Controllers
 
 
         [HttpPost]
-        public IActionResult createThing([FromBody]CreateThingDto newThingDto) {
-            
-            var selectedCategory=Uow.CategoryRepo.GetOne(newThingDto.CategoryId);
-         
+        public IActionResult createThing([FromBody] CreateThingDto newThingDto)
+        {
+
+            var selectedCategory = Uow.CategoryRepo.GetOne(newThingDto.CategoryId);
+
             if (selectedCategory is null)
                 return BadRequest("Category not found");
 
-            var newThing = new Thing { 
-                Description=newThingDto.Description, 
-                Category=selectedCategory 
+            var newThing = new Thing
+            {
+                Description = newThingDto.Description,
+                Category = selectedCategory
             };
-           
+
             if (!newThing.hasValidDescription())
                 return BadRequest("invalid thing description");
-                
+
             newThing = Uow.ThingsRepo.add(newThing);
             Uow.Complete();
 
@@ -59,12 +62,12 @@ namespace TP_GSC_BackEnd.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult deleteThing(int id) 
+        public IActionResult deleteThing(int id)
         {
             var thing = Uow.ThingsRepo.GetOne(id);
             if (thing is null)
                 return NotFound();
-            
+
             Uow.ThingsRepo.Delete(thing);
             Uow.Complete();
 
@@ -73,7 +76,8 @@ namespace TP_GSC_BackEnd.Controllers
 
 
         [HttpPatch("{id}/description/{newDesc}")]
-        public IActionResult changeThingDescription(int id, string newDesc) {
+        public IActionResult changeThingDescription(int id, string newDesc)
+        {
             if (id <= 0)
                 return BadRequest("Invlaid thing Id");
 
@@ -85,21 +89,22 @@ namespace TP_GSC_BackEnd.Controllers
 
             if (!thing.hasValidDescription())
                 return BadRequest("Invalid thing descripton");
-            
-            var modifiedRows=Uow.Complete();
 
-            return Ok((modifiedRows > 0) ? createShowDto(thing) : "Nothing has changed"); 
+            var modifiedRows = Uow.Complete();
+
+            return Ok(modifiedRows > 0 ? createShowDto(thing) : "Nothing has changed");
 
         }
 
 
         [HttpPatch("{id}/category/{newCategoryId}")]
-        public IActionResult changeThingCategory(int id, int newCategoryId) {
-            if(id<=0)
+        public IActionResult changeThingCategory(int id, int newCategoryId)
+        {
+            if (id <= 0)
                 return BadRequest("Invlaid thing Id");
             if (newCategoryId <= 0)
                 return BadRequest("Invalid Category Id");
-            
+
             var thing = Uow.ThingsRepo.GetOne(id);
             if (thing is null)
                 return NotFound("Thing not found");
@@ -113,13 +118,14 @@ namespace TP_GSC_BackEnd.Controllers
 
             var modifiedRows = Uow.Complete();
 
-            return Ok((modifiedRows > 0) ? createShowDto(thing) : "Nothing has changed");
+            return Ok(modifiedRows > 0 ? createShowDto(thing) : "Nothing has changed");
 
         }
 
 
         [HttpPut("{id}")]
-        public IActionResult updateThing(int id,[FromBody] CreateThingDto updatedThingDto) {
+        public IActionResult updateThing(int id, [FromBody] CreateThingDto updatedThingDto)
+        {
             if (id <= 0)
                 return BadRequest("Invlaid thing Id");
 
@@ -140,7 +146,7 @@ namespace TP_GSC_BackEnd.Controllers
 
             var modifiedRows = Uow.Complete();
 
-            return Ok((modifiedRows > 0) ? createShowDto(thing) : "Nothing has changed");
+            return Ok(modifiedRows > 0 ? createShowDto(thing) : "Nothing has changed");
 
         }
 
@@ -148,11 +154,13 @@ namespace TP_GSC_BackEnd.Controllers
 
 
 
-        private ShowThingDto createShowDto(Thing thing) { //Esto con AutoMapper se tendria que ir
+        private ShowThingDto createShowDto(Thing thing)
+        { //Esto con AutoMapper se tendria que ir
             var showThingDto = new ShowThingDto();
             showThingDto.Id = thing.Id;
-            showThingDto.Description= thing.Description;
-            if (thing.Category is not null) {
+            showThingDto.Description = thing.Description;
+            if (thing.Category is not null)
+            {
                 showThingDto.Category.Id = thing.Category.Id;
                 showThingDto.Category.Description = thing.Category.Description;
             }

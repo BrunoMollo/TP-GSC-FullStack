@@ -7,13 +7,15 @@ using TP_GSC_BackEnd.Data_Access.Uow;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers()
-    .AddJsonOptions(x =>
-    {
-        x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-        x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-    }
-);
+builder.Services.AddControllersWithViews();
+
+//builder.Services.AddControllers()
+//    .AddJsonOptions(x =>
+//    {
+//        x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+//        x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+//    }
+//);
 builder.Services.AddDbContext<LoanDBContext>(
     options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("LoansContextConnection"))
@@ -42,13 +44,22 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
 app.UseAuthorization();
 
 app.MapRazorPages();
 
-app.MapControllerRoute(
-       name: "default",
-       pattern: "{controller}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    //endpoints.MapControllers();
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
+
+//app.MapControllerRoute(
+//       name: "default",
+//       pattern: "{controller}/{action=Index}/{id?}");
 
 
 

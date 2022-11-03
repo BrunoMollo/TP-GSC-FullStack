@@ -2,7 +2,7 @@
 using TP_GSC_BackEnd.Data_Access.Uow;
 using TP_GSC_BackEnd.Entities;
 
-namespace TP_GSC_BackEnd.Controllers
+namespace TP_GSC_BackEnd.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -23,15 +23,16 @@ namespace TP_GSC_BackEnd.Controllers
         {
             var person = Uow.PeopleRepo.GetOne(id);
 
-            if(person == null)
+            if (person == null)
                 return NotFound();
             else
                 return Ok(person);
         }
 
         [HttpPost]
-        public IActionResult createPerson([FromBody]Person newPerson) {
-            newPerson=Uow.PeopleRepo.add(newPerson);
+        public IActionResult createPerson([FromBody] Person newPerson)
+        {
+            newPerson = Uow.PeopleRepo.add(newPerson);
             Uow.Complete();
             return Created("nice", newPerson);
         }
