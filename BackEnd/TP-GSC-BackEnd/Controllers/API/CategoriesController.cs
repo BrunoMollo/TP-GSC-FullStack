@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using TP_GSC_BackEnd.Data_Access.CategoryData;
 using TP_GSC_BackEnd.Data_Access.Uow;
+using TP_GSC_BackEnd.Dto;
+using TP_GSC_BackEnd.Dto.Maping;
 using TP_GSC_BackEnd.Entities;
 
 namespace TP_GSC_BackEnd.Controllers.API
@@ -13,14 +13,22 @@ namespace TP_GSC_BackEnd.Controllers.API
     public class CategoriesController : ControllerBase
     {
         private readonly IUnitOfWork Uow;
-        public CategoriesController(IUnitOfWork uow)
+
+        private readonly IMapper mapper;
+
+        public CategoriesController(IUnitOfWork uow, IMapper mapper)
         {
             Uow = uow;
+            this.mapper = mapper;
         }
 
 
         [HttpGet]
-        public IActionResult getCategories() => Ok(Uow.CategoryRepo.GetAll());
+        public IActionResult getCategories()
+        {
+            var categories=Uow.CategoryRepo.GetAll();       
+            return Ok(mapper.Map<ShowCategoryDto[]>(categories));
+        }
 
 
         [HttpPost]
