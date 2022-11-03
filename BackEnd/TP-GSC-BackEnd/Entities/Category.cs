@@ -10,10 +10,11 @@ namespace TP_GSC_BackEnd.Entities
     public class Category : PersistableEntity
     {
 
-        public string Description { get; set; }
-
+        public string? Description { get; set; }
         public DateTime CreationDate { get; set; }
 
+
+        public Category() { }
         public Category(string description) { 
             this.Description = description;
         }
@@ -26,7 +27,6 @@ namespace TP_GSC_BackEnd.Entities
             else
                 return false;
         }
-
         public bool hasInvalidDescription() => !hasValidDescription();
 
     }

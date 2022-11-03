@@ -34,7 +34,7 @@ namespace TP_GSC_BackEnd.Controllers.API
         {
             newPerson = Uow.PeopleRepo.add(newPerson);
             Uow.SaveChanges();
-            return Created("nice", newPerson);
+            return Created("uri??", newPerson);
         }
 
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using System.Configuration;
 using TP_GSC_BackEnd.Dto.CategotyDto;
+using TP_GSC_BackEnd.Dto.ThingDto;
 using TP_GSC_BackEnd.Entities;
 
 namespace TP_GSC_BackEnd.Dto
@@ -12,6 +12,11 @@ namespace TP_GSC_BackEnd.Dto
         {
             CreateMap<Category, ShowCategoryDto>();
             CreateMap<CreateCategoryDto, Category>();
+
+            CreateMap<Thing, ShowThingDto>();
+            CreateMap<CreateThingDto, Thing>();
+
+
         }
 
 

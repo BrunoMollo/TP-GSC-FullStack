@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using TP_GSC_BackEnd.Data_Access.Uow;
 using TP_GSC_BackEnd.Dto.ThingDto;
 using TP_GSC_BackEnd.Entities;
@@ -10,10 +11,12 @@ namespace TP_GSC_BackEnd.Controllers.API
     public class ThingsController : ControllerBase
     {
         private readonly IUnitOfWork Uow;
+        private readonly IMapper mapper;
 
-        public ThingsController(IUnitOfWork uow)
+        public ThingsController(IUnitOfWork uow, IMapper mapper)
         {
             Uow = uow;
+            this.mapper = mapper;
         }
 
 
@@ -21,7 +24,9 @@ namespace TP_GSC_BackEnd.Controllers.API
         [HttpGet]
         public IActionResult getAllThings()
         {
-            return Ok(Uow.ThingsRepo.GetAll().Select(t => createShowDto(t)));
+            var things = Uow.ThingsRepo.GetAll();
+            var thingsDto = mapper.Map<ShowThingDto[]>(things);
+            return Ok(thingsDto);
         }
 
 
@@ -32,32 +37,32 @@ namespace TP_GSC_BackEnd.Controllers.API
             if (thing is null)
                 return NotFound();
 
-            else return Ok(createShowDto(thing));
+            var thingDto = mapper.Map<ShowThingDto>(thing);
+            return Ok(thingDto);
         }
 
 
         [HttpPost]
         public IActionResult createThing([FromBody] CreateThingDto newThingDto)
         {
-
-            var selectedCategory = Uow.CategoryRepo.GetOne(newThingDto.CategoryId);
-
-            if (selectedCategory is null)
-                return BadRequest("Category not found");
-
-            var newThing = new Thing
-            {
-                Description = newThingDto.Description,
-                Category = selectedCategory
-            };
+            var newThing = mapper.Map<Thing>(newThingDto);
 
             if (!newThing.hasValidDescription())
                 return BadRequest("invalid thing description");
 
-            newThing = Uow.ThingsRepo.add(newThing);
+
+            var selectedCategory = Uow.CategoryRepo.GetOne(newThingDto.CategoryId);
+            if (selectedCategory is null)
+                return BadRequest("Category not found");
+            else
+                newThing.Category = selectedCategory;
+
+
+            var createdThing = Uow.ThingsRepo.add(newThing);
             Uow.SaveChanges();
 
-            return Created("creado", createShowDto(newThing));
+            var createdThingDto = mapper.Map<ShowThingDto>(createdThing);
+            return Created("uri??", createdThingDto);
         }
 
 
@@ -71,7 +76,7 @@ namespace TP_GSC_BackEnd.Controllers.API
             Uow.ThingsRepo.Delete(thing);
             Uow.SaveChanges();
 
-            return Ok();
+            return NoContent();
         }
 
 
@@ -92,7 +97,8 @@ namespace TP_GSC_BackEnd.Controllers.API
 
             var modifiedRows = Uow.SaveChanges();
 
-            return Ok(modifiedRows > 0 ? createShowDto(thing) : "Nothing has changed");
+            var modifiedThingDto = mapper.Map<ShowThingDto>(thing);
+            return Ok(modifiedRows > 0 ? modifiedThingDto : "Nothing has changed");
 
         }
 
@@ -118,8 +124,8 @@ namespace TP_GSC_BackEnd.Controllers.API
 
             var modifiedRows = Uow.SaveChanges();
 
-            return Ok(modifiedRows > 0 ? createShowDto(thing) : "Nothing has changed");
-
+            var modifiedThingDto = mapper.Map<ShowThingDto>(thing);
+            return Ok(modifiedRows > 0 ? modifiedThingDto : "Nothing has changed");
         }
 
 
@@ -146,26 +152,12 @@ namespace TP_GSC_BackEnd.Controllers.API
 
             var modifiedRows = Uow.SaveChanges();
 
-            return Ok(modifiedRows > 0 ? createShowDto(thing) : "Nothing has changed");
-
+            var modifiedThingDto = mapper.Map<ShowThingDto>(thing);
+            return Ok(modifiedRows > 0 ? modifiedThingDto : "Nothing has changed");
         }
 
 
 
-
-
-        private ShowThingDto createShowDto(Thing thing)
-        { //Esto con AutoMapper se tendria que ir
-            var showThingDto = new ShowThingDto();
-            showThingDto.Id = thing.Id;
-            showThingDto.Description = thing.Description;
-            if (thing.Category is not null)
-            {
-                showThingDto.Category.Id = thing.Category.Id;
-                showThingDto.Category.Description = thing.Category.Description;
-            }
-            return showThingDto;
-        }
 
     }
 }

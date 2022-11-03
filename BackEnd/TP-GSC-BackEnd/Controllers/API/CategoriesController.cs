@@ -58,7 +58,7 @@ namespace TP_GSC_BackEnd.Controllers.API
                 Uow.SaveChanges();
 
                 var createdCategoryDto = mapper.Map<ShowCategoryDto>(newCategory);
-                return Created("created: ", createdCategoryDto);
+                return Created("uri??", createdCategoryDto);
             }
             catch (DbUpdateException ex)
             {
@@ -91,9 +91,6 @@ namespace TP_GSC_BackEnd.Controllers.API
             var DbCategory = Uow.CategoryRepo.GetOne(id);
             if (DbCategory is null)
                 return NotFound();
-            if (DbCategory.Description == Recivedcategory.Description)
-                return NoContent();
-
 
             DbCategory.Description=Recivedcategory.Description;
             try
@@ -101,7 +98,8 @@ namespace TP_GSC_BackEnd.Controllers.API
                 Uow.SaveChanges();
                 return NoContent();
             }
-            catch {
+            catch (DbUpdateException ex)
+            {
                 return BadRequest("Another category already has that description");
             }
             

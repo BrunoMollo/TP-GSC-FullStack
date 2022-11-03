@@ -6,8 +6,12 @@ namespace TP_GSC_BackEnd.Entities
     public class Thing :PersistableEntity
     {
         public string? Description { get; set; }
-        public Category? Category { get; set; }
+        public Category Category { get; set; }
 
+        public Thing()
+        {
+            Category = new Category();
+        }
 
         public DateTime CreationDate { get; set; }
 
