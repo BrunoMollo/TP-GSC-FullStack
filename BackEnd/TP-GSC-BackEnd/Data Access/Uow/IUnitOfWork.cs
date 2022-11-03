@@ -10,7 +10,7 @@ namespace TP_GSC_BackEnd.Data_Access.Uow
         public IPersonRepository PeopleRepo { get; }
         public IThingsRepository ThingsRepo { get; }
 
-        public int Complete();
+        public int SaveChanges();
 
     }
 }

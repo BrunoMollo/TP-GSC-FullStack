@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TP_GSC_BackEnd.Data_Access;
 using TP_GSC_BackEnd.Data_Access.Uow;
-using TP_GSC_BackEnd.Dto.Maping;
+using TP_GSC_BackEnd.Dto;
 
 var builder = WebApplication.CreateBuilder(args);
 

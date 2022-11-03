@@ -27,5 +27,7 @@ namespace TP_GSC_BackEnd.Entities
                 return false;
         }
 
+        public bool hasInvalidDescription() => !hasValidDescription();
+
     }
 }

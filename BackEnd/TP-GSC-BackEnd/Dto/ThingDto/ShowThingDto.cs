@@ -1,4 +1,6 @@
-﻿namespace TP_GSC_BackEnd.Dto
+﻿using TP_GSC_BackEnd.Dto.CategotyDto;
+
+namespace TP_GSC_BackEnd.Dto.ThingDto
 {
     public class ShowThingDto
     {
@@ -8,7 +10,8 @@
 
         public ShowCategoryDto Category { get; set; }
 
-        public ShowThingDto() { 
+        public ShowThingDto()
+        {
             Category = new ShowCategoryDto();
         }
     }

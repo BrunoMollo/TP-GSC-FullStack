@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TP_GSC_BackEnd.Data_Access.Uow;
-using TP_GSC_BackEnd.Dto;
+using TP_GSC_BackEnd.Dto.ThingDto;
 using TP_GSC_BackEnd.Entities;
 
 namespace TP_GSC_BackEnd.Controllers.API
@@ -55,7 +55,7 @@ namespace TP_GSC_BackEnd.Controllers.API
                 return BadRequest("invalid thing description");
 
             newThing = Uow.ThingsRepo.add(newThing);
-            Uow.Complete();
+            Uow.SaveChanges();
 
             return Created("creado", createShowDto(newThing));
         }
@@ -69,7 +69,7 @@ namespace TP_GSC_BackEnd.Controllers.API
                 return NotFound();
 
             Uow.ThingsRepo.Delete(thing);
-            Uow.Complete();
+            Uow.SaveChanges();
 
             return Ok();
         }
@@ -90,7 +90,7 @@ namespace TP_GSC_BackEnd.Controllers.API
             if (!thing.hasValidDescription())
                 return BadRequest("Invalid thing descripton");
 
-            var modifiedRows = Uow.Complete();
+            var modifiedRows = Uow.SaveChanges();
 
             return Ok(modifiedRows > 0 ? createShowDto(thing) : "Nothing has changed");
 
@@ -116,7 +116,7 @@ namespace TP_GSC_BackEnd.Controllers.API
 
             thing.Category = newCategory;
 
-            var modifiedRows = Uow.Complete();
+            var modifiedRows = Uow.SaveChanges();
 
             return Ok(modifiedRows > 0 ? createShowDto(thing) : "Nothing has changed");
 
@@ -144,7 +144,7 @@ namespace TP_GSC_BackEnd.Controllers.API
 
             thing.Category = newCategory;
 
-            var modifiedRows = Uow.Complete();
+            var modifiedRows = Uow.SaveChanges();
 
             return Ok(modifiedRows > 0 ? createShowDto(thing) : "Nothing has changed");
 

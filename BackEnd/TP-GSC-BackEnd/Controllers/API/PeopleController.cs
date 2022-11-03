@@ -33,7 +33,7 @@ namespace TP_GSC_BackEnd.Controllers.API
         public IActionResult createPerson([FromBody] Person newPerson)
         {
             newPerson = Uow.PeopleRepo.add(newPerson);
-            Uow.Complete();
+            Uow.SaveChanges();
             return Created("nice", newPerson);
         }
 

@@ -1,8 +1,8 @@
-﻿namespace TP_GSC_BackEnd.Dto
+﻿namespace TP_GSC_BackEnd.Dto.ThingDto
 {
     public class CreateThingDto
     {
-        public String? Description { get; set; }
+        public string? Description { get; set; }
         public int CategoryId { get; set; }
 
     }

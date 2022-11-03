@@ -21,7 +21,7 @@ namespace TP_GSC_BackEnd.Data_Access.Uow
             ThingsRepo = new ThingsRepository(loanDBContext);
         }
 
-        public int Complete() => this._loanDBContext.SaveChanges();
+        public int SaveChanges() => this._loanDBContext.SaveChanges();
         
     }
 }

@@ -104,13 +104,55 @@
 					"response": []
 				},
 				{
+					"name": "/categories/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7193/api/categories/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7193",
+							"path": [
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/categories/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7193/api/categories/1000",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7193",
+							"path": [
+								"api",
+								"categories",
+								"1000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/categories",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Description\": \"mi cat\"\r\n}",
+							"raw": "{\r\n    \"Description\": \"mi categoria\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -127,6 +169,36 @@
 							"path": [
 								"api",
 								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/categories/1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Description\": \"mi cat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7193/api/categories/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7193",
+							"path": [
+								"api",
+								"categories",
+								"2"
 							]
 						}
 					},

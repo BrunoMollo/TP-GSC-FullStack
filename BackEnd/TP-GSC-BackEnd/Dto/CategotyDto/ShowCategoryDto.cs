@@ -1,4 +1,4 @@
-﻿namespace TP_GSC_BackEnd.Dto
+﻿namespace TP_GSC_BackEnd.Dto.CategotyDto
 {
     public class ShowCategoryDto
     {
