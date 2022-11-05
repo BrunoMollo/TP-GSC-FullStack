@@ -109,7 +109,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7193/api/categories/1",
+							"raw": "https://localhost:7193/api/categories/2",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -118,7 +118,7 @@
 							"path": [
 								"api",
 								"categories",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -235,7 +235,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7193/api/things/3",
+							"raw": "https://localhost:7193/api/things/5",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -244,7 +244,7 @@
 							"path": [
 								"api",
 								"things",
-								"3"
+								"5"
 							]
 						}
 					},
@@ -316,7 +316,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:7193/api/things/3/description/newr",
+							"raw": "https://localhost:7193/api/things/7/description/newr",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -325,7 +325,7 @@
 							"path": [
 								"api",
 								"things",
-								"3",
+								"7",
 								"description",
 								"newr"
 							]
@@ -348,7 +348,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:7193/api/things/3/category/2",
+							"raw": "https://localhost:7193/api/things/7/category/18",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -357,9 +357,9 @@
 							"path": [
 								"api",
 								"things",
-								"3",
+								"7",
 								"category",
-								"2"
+								"18"
 							]
 						}
 					},
@@ -372,7 +372,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Description\": \"otra cosa\",\r\n    \"CategoryId\": 1\r\n}",
+							"raw": "{\r\n    \"Description\": \"otra cosa\",\r\n    \"CategoryId\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -389,6 +389,41 @@
 							"path": [
 								"api",
 								"things"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserName\": \"Admin\",\r\n    \"Password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7193/api/users/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7193",
+							"path": [
+								"api",
+								"users",
+								"login"
 							]
 						}
 					},
