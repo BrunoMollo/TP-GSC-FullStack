@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TP_GSC_BackEnd.Dto.UserDto;
 using TP_GSC_BackEnd.Handlers;
 
@@ -26,6 +27,13 @@ namespace TP_GSC_BackEnd.Controllers.API
             var bearer = JwtHandler.GenerateToken(user);
 
             return Ok(new { token = bearer });
+        }
+
+            
+        [HttpGet("checkToken")]
+        [Authorize]
+        public IActionResult checkJwtToken() {
+            return Ok( new { isValid = true } ) ;
         }
 
 

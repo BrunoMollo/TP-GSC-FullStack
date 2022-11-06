@@ -1,6 +1,7 @@
 <div class="container" color="primary">
     <mat-card>
         <h1>Login</h1>
+        <div *ngIf="failedToLogin" class="error-msj">Wrong user or password</div>
         <form [formGroup]="userLoginForm" (ngSubmit)="sendLogin()">
             <mat-form-field appearance="fill">
               <mat-label for="user">Username</mat-label>
@@ -12,7 +13,7 @@
               </mat-form-field>
 
               <button mat-raised-button color="primary" [disabled]="userLoginForm.invalid">Let me in</button>
-              <a mat-button href="#">I don't have an acount yet</a>
+              <a mat-button>I don't have an acount yet</a>
           </form>
     </mat-card>
 </div>

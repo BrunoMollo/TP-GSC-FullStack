@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PeopleApiService } from 'src/app/services/peoleApi/people-api.service';
+import { Router } from '@angular/router';
 import { UserApiService } from 'src/app/services/usersApi/user-api.service';
 
 
@@ -12,19 +12,36 @@ import { UserApiService } from 'src/app/services/usersApi/user-api.service';
 export class LoginComponent implements OnInit {
 
   userLoginForm:FormGroup;
+  failedToLogin=false;
 
-  constructor(builder:FormBuilder, private readonly userService: UserApiService) { 
+  constructor(builder:FormBuilder, private userService: UserApiService, private router:Router) { 
     this.userLoginForm=builder.group({
       UserName:['',Validators.required],
       Password:['',Validators.required]
     })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.userService.istokenValid()){
+      this.router.navigate(["menu"])
+    }
+  }
 
   sendLogin(){
     let user=this.userLoginForm.value
-    this.userService.login(user)
+    this.userService.login(user).subscribe(
+      (hasAccess)=>this.updateOnLogin(hasAccess)
+    )
+  }
+
+  updateOnLogin(hasAccess:boolean){
+    if(hasAccess){
+      this.router.navigate(["menu"])
+    }
+    else{
+      this.failedToLogin=true;
+      this.userLoginForm.reset();
+    }
   }
 
 }

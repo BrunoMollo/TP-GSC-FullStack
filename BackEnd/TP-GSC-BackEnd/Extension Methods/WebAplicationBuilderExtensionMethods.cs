@@ -37,7 +37,7 @@ namespace TP_GSC_BackEnd.Extension_Methods
                     policy =>
                     {
                         policy.WithOrigins("*");
-                        policy.WithHeaders("content-type");
+                        policy.WithHeaders("*");
                     });
             });
         }

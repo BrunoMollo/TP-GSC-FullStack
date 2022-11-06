@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -34,8 +35,6 @@ namespace TP_GSC_BackEnd.Handlers
         }
 
 
-
-
         private SigningCredentials GetSigningCredentials()
         {
             byte[] keyRaw = Encoding.UTF8.GetBytes(_jwtOptions.Key); 
@@ -62,7 +61,6 @@ namespace TP_GSC_BackEnd.Handlers
             );
         }
 
-
-
+        
     }
 }
