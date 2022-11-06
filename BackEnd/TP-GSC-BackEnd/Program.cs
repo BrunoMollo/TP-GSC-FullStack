@@ -26,10 +26,14 @@ builder.Services.AddAuthorization();
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.AddCorsLocalhost(MyAllowSpecificOrigins);
+
 var app = builder.Build();
 
 
 
+app.UseCors(MyAllowSpecificOrigins);
 
 if (!app.Environment.IsDevelopment())
 {

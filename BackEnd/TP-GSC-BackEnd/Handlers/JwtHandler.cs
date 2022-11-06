@@ -23,10 +23,10 @@ namespace TP_GSC_BackEnd.Handlers
 
 
 
-        public string GenerateToken(LoginUserDto user, IEnumerable<string> roles)
+        public string GenerateToken(LoginUserDto user)
         {
             var signingCredentials = GetSigningCredentials();
-            var claims = GetClaims(user, roles);
+            var claims = GetClaims(user);
             var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
             var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
@@ -39,22 +39,15 @@ namespace TP_GSC_BackEnd.Handlers
         private SigningCredentials GetSigningCredentials()
         {
             byte[] keyRaw = Encoding.UTF8.GetBytes(_jwtOptions.Key); 
-           
             var secretkey = new SymmetricSecurityKey(keyRaw);
-
             return new SigningCredentials(secretkey, SecurityAlgorithms.HmacSha256);
         }
 
 
-        private List<Claim> GetClaims(LoginUserDto user, IEnumerable<string> roles)
+        private List<Claim> GetClaims(LoginUserDto user)
         {
             var claims = new List<Claim>();
-           
             claims.Add(new Claim(ClaimTypes.Name, user.UserName));
-
-            foreach (var role in roles)
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            
             return claims;
         }
 

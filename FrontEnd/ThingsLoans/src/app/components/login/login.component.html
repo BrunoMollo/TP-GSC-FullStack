@@ -1,18 +1,20 @@
 <div class="container" color="primary">
     <mat-card>
         <h1>Login</h1>
-        <form class="example-form">
+        <form [formGroup]="userLoginForm" (ngSubmit)="sendLogin()">
             <mat-form-field appearance="fill">
-              <mat-label>Username</mat-label>
-              <input matInput placeholder="who are you?">
+              <mat-label for="user">Username</mat-label>
+              <input matInput placeholder="who are you?" formControlName="UserName" id="user">
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>Password</mat-label>
-                <input matInput placeholder="secret words" type="password">
+                <mat-label for="psw">Password</mat-label>
+                <input matInput placeholder="secret words" formControlName="Password" type="password" id="psw">
               </mat-form-field>
 
-              <button mat-raised-button color="primary">Let me in</button>
+              <button mat-raised-button color="primary" [disabled]="userLoginForm.invalid">Let me in</button>
               <a mat-button href="#">I don't have an acount yet</a>
           </form>
     </mat-card>
 </div>
+
+

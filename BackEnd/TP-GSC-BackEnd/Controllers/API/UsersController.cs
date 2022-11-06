@@ -19,12 +19,11 @@ namespace TP_GSC_BackEnd.Controllers.API
 
         [HttpPost("login")]
         public IActionResult login(LoginUserDto user) {
-           
-            var roles = user.UserName == "admin" ?
-                    new List<string> { "Admin" } :
-                    new List<string> { "User" };
 
-            var bearer = JwtHandler.GenerateToken(user, roles);
+            if (user.UserName != "Bruno" || user.Password != "123") 
+                return NoContent();//???
+
+            var bearer = JwtHandler.GenerateToken(user);
 
             return Ok(new { token = bearer });
         }

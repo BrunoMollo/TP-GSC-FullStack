@@ -406,7 +406,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"UserName\": \"Admin\",\r\n    \"Password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"UserName\": \"Bruno\",\r\n    \"Password\": \"123w\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
