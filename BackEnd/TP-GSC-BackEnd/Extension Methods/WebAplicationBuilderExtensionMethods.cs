@@ -30,16 +30,16 @@ namespace TP_GSC_BackEnd.Extension_Methods
         }
 
 
-        public static void AddCorsLocalhost(this WebApplicationBuilder builder, string MyAllowSpecificOrigins) {
+        public static void AddCorsLocalhost(this WebApplicationBuilder builder) {
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  policy =>
-                                  {
-                                      policy.WithOrigins("http://localhost.com:4200");
-                                  });
+                options.AddDefaultPolicy(
+                    policy =>
+                    {
+                        policy.WithOrigins("*");
+                        policy.WithHeaders("content-type");
+                    });
             });
-
         }
 
     }

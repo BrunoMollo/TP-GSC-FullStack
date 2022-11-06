@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TP_GSC_BackEnd.Dto.UserDto;
 using TP_GSC_BackEnd.Handlers;
 
@@ -20,8 +19,9 @@ namespace TP_GSC_BackEnd.Controllers.API
         [HttpPost("login")]
         public IActionResult login(LoginUserDto user) {
 
-            if (user.UserName != "Bruno" || user.Password != "123") 
-                return NoContent();//???
+            if (user.UserName != "Bruno" || user.Password != "123")
+                return NotFound("Icorrect User or password");
+
 
             var bearer = JwtHandler.GenerateToken(user);
 

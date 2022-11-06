@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserApiService } from 'src/app/services/user-api.service';
+import { PeopleApiService } from 'src/app/services/peoleApi/people-api.service';
+import { UserApiService } from 'src/app/services/usersApi/user-api.service';
 
 
 @Component({

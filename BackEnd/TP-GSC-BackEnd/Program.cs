@@ -8,6 +8,8 @@ using TP_GSC_BackEnd.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddCorsLocalhost();
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<LoanDBContext>(
@@ -26,14 +28,14 @@ builder.Services.AddAuthorization();
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-builder.AddCorsLocalhost(MyAllowSpecificOrigins);
+
+
 
 var app = builder.Build();
 
 
 
-app.UseCors(MyAllowSpecificOrigins);
+
 
 if (!app.Environment.IsDevelopment())
 {
@@ -41,9 +43,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-
 app.UseStaticFiles();
+
+if (app.Environment.IsDevelopment()) 
+    app.UseCors();
+
+app.UseHttpsRedirection();
 
 app.UseRouting();
 

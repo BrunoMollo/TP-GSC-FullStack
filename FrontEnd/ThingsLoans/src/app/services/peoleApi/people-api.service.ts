@@ -5,19 +5,15 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class UserApiService {
+export class PeopleApiService {
 
-  private readonly API=`${environment.api}/users`
+  private readonly API=`${environment.api}/people`
 
   constructor(private readonly http:HttpClient) { }
 
-  login(user:any){
-    let url=`${this.API}/login`
-    let body=JSON.stringify(user)
-    this.http.post<String>(url,body).subscribe(jwt=>console.log(jwt))
+  getAll(){  
+    let url=`${this.API}/`
+    this.http.get<any>(url).subscribe(data=>console.log(data)) //CREAR TIPO
 
   }
-
-
-
 }
