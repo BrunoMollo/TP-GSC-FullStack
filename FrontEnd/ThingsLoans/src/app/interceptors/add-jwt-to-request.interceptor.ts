@@ -6,15 +6,15 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UserApiService } from '../services/usersApi/user-api.service';
+import { AccountsService } from '../services/accounts/accounts.service';
 
 @Injectable()
 export class AddJwtToRequestInterceptor implements HttpInterceptor {
 
-  constructor(private readonly userService: UserApiService) {}
+  constructor(private readonly accountsService: AccountsService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token=this.userService.getToken()
+    const token=this.accountsService.getToken()
 
     const updatedRequest= request = this.addToken(request, token ?? "")
     

@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { UserApiService } from '../services/usersApi/user-api.service';
+import { AccountsService } from '../services/accounts/accounts.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IsLoggedInGuard implements CanActivate {
 
-  constructor(private readonly userService:UserApiService){}
+  constructor(private readonly accountsService:AccountsService){}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      return this.userService.istokenValid();
+  canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+      return this.accountsService.isTokenValid();
   }
   
 }

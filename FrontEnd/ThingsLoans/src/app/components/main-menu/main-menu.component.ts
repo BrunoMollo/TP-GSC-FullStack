@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserApiService } from 'src/app/services/usersApi/user-api.service';
+import { AccountsService } from 'src/app/services/accounts/accounts.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -9,13 +9,13 @@ import { UserApiService } from 'src/app/services/usersApi/user-api.service';
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor(private userService:UserApiService, private router:Router) { }
+  constructor(private accountsService:AccountsService, private router:Router) { }
 
   ngOnInit(): void {
   }
 
   logOut(){
-    this.userService.disposeToken()
+    this.accountsService.disposeToken()
     this.router.navigate(["login"])
   }
 
