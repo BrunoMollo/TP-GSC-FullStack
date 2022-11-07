@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from 'src/app/entites/user';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ export class MockAccountsService {
 
   constructor() { }
 
-  async login(user:any):Promise<boolean>{
+  async login(user:User):Promise<boolean>{
     throw new Error("no implementado")
   }
 

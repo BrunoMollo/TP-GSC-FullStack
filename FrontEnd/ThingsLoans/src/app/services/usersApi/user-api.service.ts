@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
+import { User } from 'src/app/entites/user';
 import { environment } from 'src/environments/environment';
 
 
@@ -9,11 +10,11 @@ const API=`${environment.api}/users`
 @Injectable({
   providedIn: 'root'
 })
-export class UserApiService {
+export class UserApiService{
 
   constructor(private http:HttpClient) { }
 
-  public login(user:any):Observable<string|null>{
+  public login(user:User):Observable<string|null>{
     let url=`${API}/login`
     let body=JSON.stringify(user)
     

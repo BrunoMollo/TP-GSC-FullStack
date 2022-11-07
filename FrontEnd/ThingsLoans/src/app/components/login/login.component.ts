@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/entites/user';
 import { AccountsService } from 'src/app/services/accounts/accounts.service';
 import { UserApiService } from 'src/app/services/usersApi/user-api.service';
 
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   async sendLogin(){
-    let user=this.userLoginForm.value
+    let user:User = this.userLoginForm.value
     let hasAccess= await this.accountService.login(user)
     
     if(hasAccess){
