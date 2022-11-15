@@ -19,6 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -32,9 +35,14 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.Category.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id} ) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id} 
+                    , new { onclick=$"return confirm('Are you sure you want to delete {item.Description}?')" } )
+
+   
             </td>
         </tr>
 }

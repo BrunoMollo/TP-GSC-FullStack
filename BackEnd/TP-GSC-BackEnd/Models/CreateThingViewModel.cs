@@ -1,6 +1,5 @@
 ﻿using TP_GSC_BackEnd.Dto.CategotyDto;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.Win32.SafeHandles;
 
 namespace TP_GSC_BackEnd.Models
 {
@@ -16,6 +15,7 @@ namespace TP_GSC_BackEnd.Models
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "Category is requiered")]
+        [Display(Name ="Categoria")]
         public int CategoryId { get; set; }
 
     }
