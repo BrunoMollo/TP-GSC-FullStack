@@ -13,8 +13,11 @@ import { LoginComponent } from './components/login/login.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { AddJwtToRequestInterceptor } from './interceptors/add-jwt-to-request.interceptor';
+import { CreatePersonComponent } from './components/create-person/create-person.component';
 
 
 
@@ -23,7 +26,8 @@ import { AddJwtToRequestInterceptor } from './interceptors/add-jwt-to-request.in
   declarations: [
     AppComponent,
     LoginComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    CreatePersonComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,7 @@ import { AddJwtToRequestInterceptor } from './interceptors/add-jwt-to-request.in
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatCardModule,MatInputModule,MatButtonModule
+    MatCardModule,MatInputModule,MatButtonModule, MatFormFieldModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:AddJwtToRequestInterceptor, multi:true}

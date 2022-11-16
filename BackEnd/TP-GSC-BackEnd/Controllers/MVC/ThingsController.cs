@@ -157,6 +157,7 @@ namespace TP_GSC_BackEnd.Controllers.MVC
             return View(thingDto);
         }
 
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirm(int? id)

@@ -1,0 +1,25 @@
+<div class="container" color="primary">
+    <mat-card>
+        <h1>New Person</h1>
+  
+        <form [formGroup]="personForm" (ngSubmit)="submit()">
+            <mat-form-field appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="Name">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label for="psw">Phone</mat-label>
+                <input matInput formControlName="PhoneNumber">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label for="psw">Email</mat-label>
+                <input matInput type="email" formControlName="Email">
+            </mat-form-field>
+
+              <button mat-raised-button color="primary" >Create</button>
+          </form>
+    </mat-card>
+</div>
+

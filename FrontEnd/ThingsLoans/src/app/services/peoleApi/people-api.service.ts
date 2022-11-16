@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Person } from 'src/app/entites/person';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,7 +14,12 @@ export class PeopleApiService {
 
   getAll(){  
     let url=`${this.API}/`
-    this.http.get<any>(url).subscribe(data=>console.log(data)) //CREAR TIPO
+    this.http.get<Person>(url).subscribe(data=>console.log(data))
 
+  }
+
+  add(newPerson:Person){
+    let url=`${this.API}/`
+    this.http.post(url, newPerson).subscribe(data=>console.log(data))
   }
 }
