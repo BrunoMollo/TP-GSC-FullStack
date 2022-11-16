@@ -1,11 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 using TP_GSC_BackEnd.Data_Access.Generic;
-using TP_GSC_BackEnd.Entities;
+
 
 namespace TP_GSC_BackEnd.Data_Access
 {
     public class Repository<T> : IRepository<T>
-        where T : PersistableEntity
+        where T : PersistableEntity , new()
     {
 
         protected LoanDBContext context;
@@ -47,5 +49,11 @@ namespace TP_GSC_BackEnd.Data_Access
             dbSet.Remove(entity);
         }
 
+        public void DeleteById(int id)
+        {
+            var entity = GetOne(id);
+            if (entity is not null)
+                Delete(entity);
+        }
     }
 }

@@ -2,6 +2,7 @@
 {
     public abstract class PersistableEntity
     {
+        public PersistableEntity() { }
         public int Id { get; set; }
     }
 }

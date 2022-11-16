@@ -23,6 +23,7 @@ namespace TP_GSC_BackEnd.Controllers.MVC
 
 
 
+        [HttpGet]
         public IActionResult Index()
         {
             var AllThings = Uow.ThingsRepo.GetAll();
@@ -32,7 +33,7 @@ namespace TP_GSC_BackEnd.Controllers.MVC
 
 
 
-
+        [HttpGet]
         public IActionResult Create()
         {
             var AllCategories = Uow.CategoryRepo.GetAll();
@@ -83,6 +84,7 @@ namespace TP_GSC_BackEnd.Controllers.MVC
 
 
 
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id is null || id == 0)
@@ -140,7 +142,8 @@ namespace TP_GSC_BackEnd.Controllers.MVC
         }
 
 
-        //[ValidateAntiForgeryToken] ES BUENA IDEA HACER UNDELETE CON UN GET????
+
+        [HttpGet]
         public IActionResult Delete(int? id) {
             if (id is null || id == 0)
                 return NotFound();
@@ -149,12 +152,22 @@ namespace TP_GSC_BackEnd.Controllers.MVC
             if (thing is null)
                 return NotFound();
 
-            Uow.ThingsRepo.Delete(thing);
+            var thingDto = Mapper.Map<ShowThingDto>(thing);
+
+            return View(thingDto);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirm(int? id)
+        {
+            if (id is null)
+                return NotFound();
+
+            Uow.ThingsRepo.DeleteById(id.Value);
             Uow.SaveChanges();
-
+            
             return RedirectToAction(nameof(Index));
-
-
         }
 
 

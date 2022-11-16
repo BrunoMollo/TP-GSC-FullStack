@@ -17,6 +17,7 @@ namespace TP_GSC_BackEnd.Data_Access
 
         public void Delete(T entity);
 
+        public void DeleteById(int id);
 
 
     }
