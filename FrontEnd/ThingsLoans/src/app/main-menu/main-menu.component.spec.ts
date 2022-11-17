@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AccountsService } from 'src/app/services/accounts/accounts.service';
-import { MockAccountsService } from 'src/app/services/accounts/mock-accounts.service';
+import { AccountsService } from 'src/app/login/accounts--service/accounts.service';
+import { MockAccountsService } from 'src/app/login/accounts--service/mock-accounts.service';
 
 import { MainMenuComponent } from './main-menu.component';
 

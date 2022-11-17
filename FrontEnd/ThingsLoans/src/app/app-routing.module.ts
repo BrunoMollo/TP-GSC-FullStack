@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreatePersonComponent } from './components/create-person/create-person.component';
-import { LoginComponent } from './components/login/login.component';
-import { MainMenuComponent } from './components/main-menu/main-menu.component';
-import { IsLoggedInGuard } from './guards/is-logged-in.guard';
+import { CreatePersonComponent } from './People-feature/create-person/create-person.component';
+import { LoginComponent } from './login/login/login.component';
+import { MainMenuComponent } from './main-menu/main-menu.component';
+import { IsLoggedInGuard } from './login/is-logged-in--guard/is-logged-in.guard';
+import { ListPeopleComponent } from './People-feature/list-people/list-people.component';
 
 const routes: Routes = [
   {path:"login",component:LoginComponent},
-  {path:"menu",component:MainMenuComponent, canActivate:[IsLoggedInGuard], 
+  {path:"menu",component:MainMenuComponent, canActivate:[IsLoggedInGuard],
       children:[
-        {path:"people", component:CreatePersonComponent}
+        {path:"people/new", component:CreatePersonComponent},
+        {path:"people", component:ListPeopleComponent, pathMatch:'full'}
       ]
 },
   {path:"**", redirectTo:"login", pathMatch: 'full'},

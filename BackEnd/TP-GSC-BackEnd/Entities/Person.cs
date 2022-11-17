@@ -10,8 +10,5 @@ namespace TP_GSC_BackEnd.Entities
 
         public String? Email { get; set; }
 
-
-
-
     }
 }

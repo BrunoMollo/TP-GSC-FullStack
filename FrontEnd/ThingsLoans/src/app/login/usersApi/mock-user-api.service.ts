@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { User } from 'src/app/entites/user';
-import { AccountsService } from '../accounts/accounts.service';
+import { User } from 'src/app/login/user';
+import { AccountsService } from '../accounts--service/accounts.service';
 
 
 

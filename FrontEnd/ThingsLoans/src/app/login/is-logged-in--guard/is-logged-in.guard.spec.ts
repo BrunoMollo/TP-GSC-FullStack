@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { MockUserApiService } from '../services/usersApi/mock-user-api.service';
-import { UserApiService } from '../services/usersApi/user-api.service';
+import { MockUserApiService } from '../usersApi/mock-user-api.service';
+import { UserApiService } from '../usersApi/user-api.service';
 
 import { IsLoggedInGuard } from './is-logged-in.guard';
 

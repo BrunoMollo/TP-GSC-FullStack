@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Person } from 'src/app/entites/person';
+import { firstValueFrom } from 'rxjs';
+import { Person } from 'src/app/People-feature/person';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,14 +13,14 @@ export class PeopleApiService {
 
   constructor(private readonly http:HttpClient) { }
 
-  getAll(){  
+  getAll():Promise<Person[]>{  
     let url=`${this.API}/`
-    this.http.get<Person>(url).subscribe(data=>console.log(data))
-
+    let observer=this.http.get<Person[]>(url);
+    return firstValueFrom(observer);
   }
 
   add(newPerson:Person){
     let url=`${this.API}/`
-    this.http.post(url, newPerson).subscribe(data=>console.log(data))
+    this.http.post(url, newPerson).subscribe(data=>console.log("Posted:", data))
   }
 }

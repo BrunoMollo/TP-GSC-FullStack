@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
 using TP_GSC_BackEnd.Data_Access.Uow;
 using TP_GSC_BackEnd.Entities;
+
 
 namespace TP_GSC_BackEnd.Controllers.API
 {
@@ -16,6 +19,7 @@ namespace TP_GSC_BackEnd.Controllers.API
 
 
         [HttpGet]
+        [Authorize(Roles = "USER")]
         public IActionResult getAllPeople() => Ok(Uow.PeopleRepo.GetAll());
 
         [HttpGet("{id}")]
@@ -30,8 +34,13 @@ namespace TP_GSC_BackEnd.Controllers.API
         }
 
         [HttpPost]
+        [Authorize(Roles = "USER")]
         public IActionResult createPerson([FromBody] Person newPerson)
         {
+            
+            if (newPerson.Name is null || newPerson.Name==String.Empty)
+                return BadRequest("Name is required");
+            
             newPerson = Uow.PeopleRepo.add(newPerson);
             Uow.SaveChanges();
             return Created("uri??", newPerson);

@@ -1,10 +1,10 @@
-﻿using TP_GSC_BackEnd.Dto.UserDto;
+﻿using TP_GSC_BackEnd.Entities;
 
 namespace TP_GSC_BackEnd.Handlers
 {
     public interface IJwtHandler
     {
-        string GenerateToken(LoginUserDto user);
+        string GenerateToken(User user);
 
     }
 }

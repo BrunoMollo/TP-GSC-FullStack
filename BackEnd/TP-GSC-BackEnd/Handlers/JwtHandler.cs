@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using TP_GSC_BackEnd.Configuration;
-using TP_GSC_BackEnd.Dto.UserDto;
+using TP_GSC_BackEnd.Entities;
 
 namespace TP_GSC_BackEnd.Handlers
 {
@@ -24,7 +24,7 @@ namespace TP_GSC_BackEnd.Handlers
 
 
 
-        public string GenerateToken(LoginUserDto user)
+        public string GenerateToken(User user)
         {
             var signingCredentials = GetSigningCredentials();
             var claims = GetClaims(user);
@@ -43,10 +43,11 @@ namespace TP_GSC_BackEnd.Handlers
         }
 
 
-        private List<Claim> GetClaims(LoginUserDto user)
+        private List<Claim> GetClaims(User user)
         {
             var claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, user.UserName));
+            claims.Add(new Claim(ClaimTypes.Role, user.Role));
             return claims;
         }
 

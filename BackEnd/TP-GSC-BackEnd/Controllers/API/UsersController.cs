@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TP_GSC_BackEnd.Dto.UserDto;
+using TP_GSC_BackEnd.Entities;
 using TP_GSC_BackEnd.Handlers;
 
 namespace TP_GSC_BackEnd.Controllers.API
@@ -18,7 +18,7 @@ namespace TP_GSC_BackEnd.Controllers.API
 
 
         [HttpPost("login")]
-        public IActionResult login(LoginUserDto user) {
+        public IActionResult login(User user) {
 
             if (user.UserName != "Bruno" || user.Password != "123")
                 return NotFound("Icorrect User or password");

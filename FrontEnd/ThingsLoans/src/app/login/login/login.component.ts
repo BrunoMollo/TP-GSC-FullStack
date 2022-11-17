@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/entites/user';
-import { AccountsService } from 'src/app/services/accounts/accounts.service';
-import { UserApiService } from 'src/app/services/usersApi/user-api.service';
+import { User } from 'src/app/login/user';
+import { AccountsService } from 'src/app/login/accounts--service/accounts.service';
+import { UserApiService } from 'src/app/login/usersApi/user-api.service';
 
 
 @Component({

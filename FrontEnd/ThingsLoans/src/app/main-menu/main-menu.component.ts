@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountsService } from 'src/app/services/accounts/accounts.service';
+import { AccountsService } from 'src/app/login/accounts--service/accounts.service';
 
 @Component({
   selector: 'app-main-menu',

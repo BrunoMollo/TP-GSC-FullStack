@@ -8,16 +8,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './login/login/login.component';
 
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatTableModule} from '@angular/material/table';
 
-import { MainMenuComponent } from './components/main-menu/main-menu.component';
-import { AddJwtToRequestInterceptor } from './interceptors/add-jwt-to-request.interceptor';
-import { CreatePersonComponent } from './components/create-person/create-person.component';
+import { MainMenuComponent } from './main-menu/main-menu.component';
+import { AddJwtToRequestInterceptor } from './login/add-jwt--interceptor/add-jwt-to-request.interceptor';
+import { CreatePersonComponent } from './People-feature/create-person/create-person.component';
+import { ListPeopleComponent } from './People-feature/list-people/list-people.component';
 
 
 
@@ -27,7 +29,8 @@ import { CreatePersonComponent } from './components/create-person/create-person.
     AppComponent,
     LoginComponent,
     MainMenuComponent,
-    CreatePersonComponent
+    CreatePersonComponent,
+    ListPeopleComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { CreatePersonComponent } from './components/create-person/create-person.
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatCardModule,MatInputModule,MatButtonModule, MatFormFieldModule
+    MatCardModule,MatInputModule,MatButtonModule, MatFormFieldModule, MatTableModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:AddJwtToRequestInterceptor, multi:true}

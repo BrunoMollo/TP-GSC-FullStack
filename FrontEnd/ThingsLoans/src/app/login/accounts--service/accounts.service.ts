@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { firstValueFrom, map } from 'rxjs';
-import { User } from 'src/app/entites/user';
+import { User } from 'src/app/login/user';
 import { UserApiService } from '../usersApi/user-api.service';
 
 const LOCAL_STORAGE_KEY="jwt"

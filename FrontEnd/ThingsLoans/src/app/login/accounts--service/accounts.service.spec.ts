@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { User } from 'src/app/entites/user';
+import { User } from 'src/app/login/user';
 import { MockUserApiService } from '../usersApi/mock-user-api.service';
 import { UserApiService } from '../usersApi/user-api.service';
 
