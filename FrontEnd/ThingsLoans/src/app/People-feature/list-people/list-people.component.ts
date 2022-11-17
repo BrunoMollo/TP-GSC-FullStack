@@ -11,13 +11,19 @@ export class ListPeopleComponent implements OnInit {
 
 
   allPeople:Person[]=[]
-  columnsToDisplay = ['Name', 'PhoneNumber', 'Email'];
+  columnsToDisplay = ['Name', 'PhoneNumber', 'Email', 'delete'];
 
   constructor(private peopleApi: PeopleApiService) { }
 
   async ngOnInit() {
     this.allPeople= await this.peopleApi.getAll()
     console.log(this.allPeople);
+  }
+
+  delete(person:Person){
+    console.log("dewde")
+    this.peopleApi.delete(person);
+    this.allPeople = this.allPeople.filter((p)=>p.id!=person.id);
   }
 
 }

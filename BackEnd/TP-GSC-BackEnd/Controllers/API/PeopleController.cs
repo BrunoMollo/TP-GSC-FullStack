@@ -47,6 +47,15 @@ namespace TP_GSC_BackEnd.Controllers.API
         }
 
 
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "USER")]
+        public IActionResult deletePerson(int id) { 
+            Uow.PeopleRepo.DeleteById(id);
+            Uow.SaveChanges();
+            return NoContent();
+        }
+
+
 
     }
 }

@@ -38,6 +38,8 @@ namespace TP_GSC_BackEnd.Extension_Methods
                     {
                         policy.WithOrigins("*");
                         policy.WithHeaders("*");
+                        policy.WithMethods("*");
+                        policy.WithExposedHeaders("*");
                     });
             });
         }

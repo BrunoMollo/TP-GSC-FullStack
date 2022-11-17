@@ -23,4 +23,9 @@ export class PeopleApiService {
     let url=`${this.API}/`
     this.http.post(url, newPerson).subscribe(data=>console.log("Posted:", data))
   }
+
+  delete(targer:Person){
+    let url=`${this.API}/${targer.id}`
+    this.http.delete(url).subscribe(data=>console.log("Deleted: ", data))
+  }
 }
