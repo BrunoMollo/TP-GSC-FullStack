@@ -16,10 +16,18 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTableModule} from '@angular/material/table';
 
-import { MainMenuComponent } from './main-menu/main-menu.component';
 import { AddJwtToRequestInterceptor } from './login/add-jwt--interceptor/add-jwt-to-request.interceptor';
 import { CreatePersonComponent } from './People-feature/create-person/create-person.component';
 import { ListPeopleComponent } from './People-feature/list-people/list-people.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import {MatMenuModule} from '@angular/material/menu';
+
+
+import { NavigationComponent } from './navigation/navigation.component';
 
 
 
@@ -28,9 +36,9 @@ import { ListPeopleComponent } from './People-feature/list-people/list-people.co
   declarations: [
     AppComponent,
     LoginComponent,
-    MainMenuComponent,
     CreatePersonComponent,
-    ListPeopleComponent
+    ListPeopleComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +46,7 @@ import { ListPeopleComponent } from './People-feature/list-people/list-people.co
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatCardModule,MatInputModule,MatButtonModule, MatFormFieldModule, MatTableModule
+    MatCardModule,MatInputModule,MatButtonModule, MatFormFieldModule, MatTableModule, LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:AddJwtToRequestInterceptor, multi:true}

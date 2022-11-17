@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreatePersonComponent } from './People-feature/create-person/create-person.component';
 import { LoginComponent } from './login/login/login.component';
-import { MainMenuComponent } from './main-menu/main-menu.component';
 import { IsLoggedInGuard } from './login/is-logged-in--guard/is-logged-in.guard';
 import { ListPeopleComponent } from './People-feature/list-people/list-people.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 const routes: Routes = [
   {path:"login",component:LoginComponent},
-  {path:"menu",component:MainMenuComponent, canActivate:[IsLoggedInGuard],
+  {path:"menu",component:NavigationComponent, canActivate:[IsLoggedInGuard],
       children:[
         {path:"people/new", component:CreatePersonComponent},
         {path:"people", component:ListPeopleComponent, pathMatch:'full'}

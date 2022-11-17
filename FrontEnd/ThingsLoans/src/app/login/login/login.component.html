@@ -1,6 +1,9 @@
 <div class="container" color="primary">
     <mat-card>
+      <div class="title-container">
+        <span class="lock-emoji">🔐</span>
         <h1>Login</h1>
+      </div>
         <div *ngIf="failedToLogin" class="error-msj">Wrong user or password</div>
         <form [formGroup]="userLoginForm" (ngSubmit)="sendLogin()">
             <mat-form-field appearance="fill">

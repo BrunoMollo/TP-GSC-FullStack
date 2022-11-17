@@ -1,7 +1,5 @@
 <h1>People</h1>
 
-<button [routerLink]="'new'">New</button> 
-
 <table mat-table [dataSource]="allPeople" class="mat-elevation-z8">
 
     <ng-container matColumnDef="Name">
@@ -25,5 +23,6 @@
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
   </table>
+  
   
   
