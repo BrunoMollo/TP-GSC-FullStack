@@ -27,10 +27,8 @@ export class CreatePersonComponent implements OnInit {
   }
 
   submit(){
-    console.log("dewde")
     const newPerson:Person= this.personForm.value;
-    console.log(newPerson)
-    newPerson.phoneNumber=newPerson.phoneNumber.toString()
+    newPerson.phoneNumber=newPerson.phoneNumber.toString() //del form viene como un number
 
     this.peopleApi.sendAdd(newPerson)
     this.router.navigate(['menu','people']);

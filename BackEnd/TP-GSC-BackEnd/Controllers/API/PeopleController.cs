@@ -18,9 +18,13 @@ namespace TP_GSC_BackEnd.Controllers.API
         }
 
 
+
+
         [HttpGet]
         [Authorize(Roles = "USER")]
         public IActionResult getAllPeople() => Ok(Uow.PeopleRepo.GetAll());
+
+
 
         [HttpGet("{id}")]
         public IActionResult getOnePerson(int id)
@@ -32,6 +36,8 @@ namespace TP_GSC_BackEnd.Controllers.API
             else
                 return Ok(person);
         }
+
+
 
         [HttpPost]
         [Authorize(Roles = "USER")]
@@ -47,6 +53,30 @@ namespace TP_GSC_BackEnd.Controllers.API
         }
 
 
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "USER")]
+        public IActionResult updatePerson(int id, Person changedPerson) {
+            if (changedPerson.Name is null || changedPerson.Name.Length < 3)
+                return BadRequest("the name of the person must have at least 3 characters");
+
+            var person=Uow.PeopleRepo.GetOne(id);
+            if (person is null)
+                return NotFound();
+
+            person.Name = changedPerson.Name;
+            person.PhoneNumber = changedPerson.PhoneNumber;
+            person.Email = changedPerson.Email;
+
+
+            Uow.PeopleRepo.update(person);
+            Uow.SaveChanges();
+
+            return NoContent();
+        }
+
+
+
         [HttpDelete("{id}")]
         [Authorize(Roles = "USER")]
         public IActionResult deletePerson(int id) { 
@@ -54,6 +84,9 @@ namespace TP_GSC_BackEnd.Controllers.API
             Uow.SaveChanges();
             return NoContent();
         }
+
+
+
 
 
 

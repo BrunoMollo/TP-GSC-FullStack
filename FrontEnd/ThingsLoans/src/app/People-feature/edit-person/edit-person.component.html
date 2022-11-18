@@ -1,7 +1,6 @@
 <div class="container" color="primary">
     <mat-card>
-        <h1>New Person</h1>
-  
+        <h1>Edit Person</h1>
         <form [formGroup]="personForm" (ngSubmit)="submit()">
             <mat-form-field appearance="fill">
               <mat-label>Name</mat-label>
@@ -18,9 +17,10 @@
                 <input matInput type="email" formControlName="email" type="email">
             </mat-form-field>
 
-              <button mat-raised-button color="primary" [disabled]="personForm.invalid">Create</button>
-              <a mat-button routerLink="..">Go back</a>
+              <button mat-raised-button color="primary" [disabled]="personForm.invalid">Save changes</button>
+              <a mat-button routerLink="../..">Go back</a>
           </form>
+          
     </mat-card>
 </div>
 

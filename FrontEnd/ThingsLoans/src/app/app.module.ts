@@ -28,6 +28,7 @@ import {MatMenuModule} from '@angular/material/menu';
 
 
 import { NavigationComponent } from './navigation/navigation.component';
+import { EditPersonComponent } from './People-feature/edit-person/edit-person.component';
 
 
 
@@ -38,7 +39,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     LoginComponent,
     CreatePersonComponent,
     ListPeopleComponent,
-    NavigationComponent
+    NavigationComponent,
+    EditPersonComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatCardModule,MatInputModule,MatButtonModule, MatFormFieldModule, MatTableModule, LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule
+    MatCardModule,MatInputModule,MatButtonModule, MatFormFieldModule, MatTableModule,
+     LayoutModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:AddJwtToRequestInterceptor, multi:true}

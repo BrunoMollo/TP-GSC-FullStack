@@ -12,7 +12,7 @@ export class ListPeopleComponent implements OnInit {
 
 
   allPeople:Observable<Person[]>=EMPTY
-  columnsToDisplay = ['Name', 'PhoneNumber', 'Email', 'delete'];
+  columnsToDisplay = ['Name', 'PhoneNumber', 'Email', 'delete', 'edit'];
 
   constructor(private peopleApi: PeopleApiService) { }
 

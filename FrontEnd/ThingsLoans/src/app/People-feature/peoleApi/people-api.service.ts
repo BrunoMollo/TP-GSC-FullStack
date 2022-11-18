@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Person } from 'src/app/People-feature/person';
 import { environment } from 'src/environments/environment';
 
@@ -18,15 +18,27 @@ export class PeopleApiService {
     return this.http.get<Person[]>(url);
   }
 
+  RequestOne(id:number):Observable<Person|null>{
+    let url=`${this.API}/${id}`
+    return this.http.get<Person>(url).pipe( catchError(err=> of(null) ) );
+  }
+
   sendAdd(newPerson:Person){
     let url=`${this.API}/`
-    this.http.post(url, newPerson).subscribe(data=>console.log("Posted:", data))
+    this.http.post(url, newPerson).subscribe()
   }
 
   sendDelete(targer:Person){
     let url=`${this.API}/${targer.id}`
-    this.http.delete(url).subscribe(data=>console.log("Deleted: ", data))
+    this.http.delete(url).subscribe()
   }
+
+  sendUpdate(person:Person){
+    let url=`${this.API}/${person.id}`
+    this.http.put(url, person).subscribe();
+  }
+
+
 
   removeForm(obs:Observable<Person[]>,personRemoved:Person):Observable<Person[]>{
     return obs.pipe(
