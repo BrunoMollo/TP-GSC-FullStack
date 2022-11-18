@@ -13,7 +13,7 @@
  
     <ng-container matColumnDef="PhoneNumber">
       <th mat-header-cell *matHeaderCellDef> Phone </th>
-      <td mat-cell *matCellDef="let person"> {{person.phoneNumber}} </td>
+      <td mat-cell *matCellDef="let person"> {{person.phoneNumber|phoneNumber}} </td>
     </ng-container>
   
   
@@ -23,16 +23,17 @@
     </ng-container>
 
     <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef>  
-        <mat-icon class="refresh-icon" fontIcon="refresh" (click)="refreshList()"></mat-icon>
-      </th>
+      <th mat-header-cell *matHeaderCellDef>  </th>
       <td mat-cell *matCellDef="let person">
         <mat-icon class="delete-icon" fontIcon="delete" (click)="delete(person)"></mat-icon>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef>  </th>
+     
+      <th mat-header-cell *matHeaderCellDef>  
+        <mat-icon class="refresh-icon" fontIcon="refresh" (click)="refreshList()"></mat-icon>
+      </th>
       <td mat-cell *matCellDef="let person">
         <mat-icon class="edit-icon" fontIcon="edit" [routerLink]="'edit/'+person.id"></mat-icon>
       </td>

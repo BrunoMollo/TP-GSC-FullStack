@@ -27,3 +27,7 @@
 }
 
 
+mat-sidenav-content{
+  background: linear-gradient(to bottom right, #303030,  #313131, #302930);
+}
+

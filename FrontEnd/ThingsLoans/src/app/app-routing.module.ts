@@ -6,14 +6,16 @@ import { IsLoggedInGuard } from './login/is-logged-in--guard/is-logged-in.guard'
 import { ListPeopleComponent } from './People-feature/list-people/list-people.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { EditPersonComponent } from './People-feature/edit-person/edit-person.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"menu",component:NavigationComponent, canActivate:[IsLoggedInGuard],
       children:[
-        {path:"people/new", component:CreatePersonComponent},
         {path:"people/edit/:id", component:EditPersonComponent},
-        {path:"people", component:ListPeopleComponent, pathMatch:'full'}
+        {path:"people/new", component:CreatePersonComponent},
+        {path:"people", component:ListPeopleComponent},
+        {path:"", component:WelcomeComponent, pathMatch:'full'}
       ]
 },
   {path:"**", redirectTo:"login"}

@@ -29,6 +29,8 @@ import {MatMenuModule} from '@angular/material/menu';
 
 import { NavigationComponent } from './navigation/navigation.component';
 import { EditPersonComponent } from './People-feature/edit-person/edit-person.component';
+import { PhoneNumberPipe } from './People-feature/phone-number--pipe/phone-number.pipe';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 
@@ -40,7 +42,9 @@ import { EditPersonComponent } from './People-feature/edit-person/edit-person.co
     CreatePersonComponent,
     ListPeopleComponent,
     NavigationComponent,
-    EditPersonComponent
+    EditPersonComponent,
+    PhoneNumberPipe,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

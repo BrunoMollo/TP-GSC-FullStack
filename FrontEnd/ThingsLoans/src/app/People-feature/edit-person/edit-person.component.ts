@@ -12,7 +12,7 @@ import { Person } from '../person';
 })
 export class EditPersonComponent implements OnInit {
 
-  person:Person|undefined
+  person!: Person;
   personForm:FormGroup;
 
   constructor(builder:FormBuilder, private peopleApi: PeopleApiService, private router:Router, private activatedRoute:ActivatedRoute) {
@@ -35,10 +35,11 @@ export class EditPersonComponent implements OnInit {
         this.peopleApi.RequestOne(+id)
                 .subscribe(
                       data => {
-                        if(data==null)
+                        if(data==null || undefined)
                           this.router.navigate(['menu','people'])
                         else
                           this.person=data
+                          this.personForm.setValue(this.person);
                       }
                 )
      } 
