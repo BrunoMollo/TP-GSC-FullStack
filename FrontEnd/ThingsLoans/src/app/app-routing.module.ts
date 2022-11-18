@@ -14,8 +14,7 @@ const routes: Routes = [
         {path:"people", component:ListPeopleComponent, pathMatch:'full'}
       ]
 },
-  {path:"**", redirectTo:"login", pathMatch: 'full'},
-  {path:"", redirectTo:"login", pathMatch: 'full'}
+  {path:"**", redirectTo:"login"}
 ];
 
 @NgModule({

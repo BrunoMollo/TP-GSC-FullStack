@@ -5,20 +5,20 @@
         <form [formGroup]="personForm" (ngSubmit)="submit()">
             <mat-form-field appearance="fill">
               <mat-label>Name</mat-label>
-              <input matInput formControlName="Name">
+              <input matInput formControlName="name">
             </mat-form-field>
 
             <mat-form-field appearance="fill">
                 <mat-label for="psw">Phone</mat-label>
-                <input matInput formControlName="PhoneNumber">
+                <input matInput formControlName="phoneNumber" type="number">
             </mat-form-field>
 
             <mat-form-field appearance="fill">
                 <mat-label for="psw">Email</mat-label>
-                <input matInput type="email" formControlName="Email">
+                <input matInput type="email" formControlName="email" type="email">
             </mat-form-field>
 
-              <button mat-raised-button color="primary" >Create</button>
+              <button mat-raised-button color="primary" [disabled]="personForm.invalid">Create</button>
           </form>
     </mat-card>
 </div>

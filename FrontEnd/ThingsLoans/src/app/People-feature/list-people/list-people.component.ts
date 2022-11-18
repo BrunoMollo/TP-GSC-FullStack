@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EMPTY, filter, map, Observable, partition } from 'rxjs';
 import { PeopleApiService } from '../peoleApi/people-api.service';
 import { Person } from '../person';
 
@@ -10,20 +11,21 @@ import { Person } from '../person';
 export class ListPeopleComponent implements OnInit {
 
 
-  allPeople:Person[]=[]
+  allPeople:Observable<Person[]>=EMPTY
   columnsToDisplay = ['Name', 'PhoneNumber', 'Email', 'delete'];
 
   constructor(private peopleApi: PeopleApiService) { }
 
-  async ngOnInit() {
-    this.allPeople= await this.peopleApi.getAll()
-    console.log(this.allPeople);
+  ngOnInit() {
+    this.allPeople= this.peopleApi.RequestAll()
   }
 
   delete(person:Person){
-    console.log("dewde")
-    this.peopleApi.delete(person);
-    this.allPeople = this.allPeople.filter((p)=>p.id!=person.id);
+    this.peopleApi.sendDelete(person);
+    this.allPeople=this.peopleApi.removeForm(this.allPeople, person)
   }
 
+  refreshList(){
+    this.allPeople= this.peopleApi.RequestAll()
+  }
 }

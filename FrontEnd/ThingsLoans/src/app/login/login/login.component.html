@@ -4,20 +4,26 @@
         <span class="lock-emoji">🔐</span>
         <h1>Login</h1>
       </div>
-        <div *ngIf="failedToLogin" class="error-msj">Wrong user or password</div>
+        
         <form [formGroup]="userLoginForm" (ngSubmit)="sendLogin()">
-            <mat-form-field appearance="fill">
+          
+          <div *ngIf="failedToLogin" class="error-msj">Wrong user or password ❌</div>
+          
+          <mat-form-field appearance="fill">
               <mat-label for="user">Username</mat-label>
               <input matInput placeholder="who are you?" formControlName="UserName" id="user">
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label for="psw">Password</mat-label>
-                <input matInput placeholder="secret words" formControlName="Password" type="password" id="psw">
-              </mat-form-field>
+          </mat-form-field>
+            
+          <mat-form-field appearance="fill">
+              <mat-label for="psw">Password</mat-label>
+              <input matInput placeholder="secret words" formControlName="Password" type="password" id="psw">
+          </mat-form-field>
 
-              <button mat-raised-button color="primary" [disabled]="userLoginForm.invalid">Let me in</button>
-              <a mat-button>I don't have an acount yet</a>
+            <button mat-raised-button color="primary" [disabled]="userLoginForm.invalid">Let me in</button>
+            <a mat-button>I don't have an acount yet</a>
+
           </form>
+
     </mat-card>
 </div>
 

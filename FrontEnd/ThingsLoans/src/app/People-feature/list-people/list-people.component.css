@@ -13,6 +13,26 @@ h1{
 }
 
 
+
+.refresh-icon{
+  transition: 0.15s ease-in-out;
+}
+.refresh-icon:hover{
+  cursor: pointer;
+  color: #7d7d7d;
+}
+.refresh-icon:active{
+  transform: rotate(360deg);
+  animation-name: rotate;
+  animation-duration: 200ms;
+}
+@keyframes rotate {
+  from {transform: none;}
+  to { transform: rotate(360deg);}
+}
+
+
+
 .delete-icon{
   transition: 0.15s ease-in-out;
 }
