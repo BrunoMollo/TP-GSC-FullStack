@@ -5,6 +5,7 @@ using TP_GSC_BackEnd.Data_Access.Uow;
 using TP_GSC_BackEnd.Dto;
 using TP_GSC_BackEnd.Extension_Methods;
 using TP_GSC_BackEnd.Handlers;
+using TP_GSC_BackEnd.Protos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,10 @@ builder.Services.AddAuthorization();
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 
+builder.Services.AddGrpc(opt => {
+    opt.EnableDetailedErrors = true;
+});
+builder.Services.AddGrpcReflection();
 
 
 
@@ -45,8 +50,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 
-if (app.Environment.IsDevelopment()) 
+if (app.Environment.IsDevelopment()) {
     app.UseCors();
+    app.MapGrpcReflectionService();
+} 
+   
 
 app.UseHttpsRedirection();
 
@@ -61,6 +69,9 @@ app.MapRazorPages();
 app.MapControllerRoute(
        name: "default",
        pattern: "{controller}/{action=Index}/{id?}");
+
+
+app.MapGrpcService<LoansGrpc>();
 
 
 
