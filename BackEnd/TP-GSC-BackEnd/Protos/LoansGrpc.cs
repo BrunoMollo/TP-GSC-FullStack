@@ -1,5 +1,4 @@
 ﻿using Grpc.Core;
-using Microsoft.Extensions.Logging;
 
 namespace TP_GSC_BackEnd.Protos
 {
@@ -14,7 +13,7 @@ namespace TP_GSC_BackEnd.Protos
 
         public override Task<Response> closeLoan(Loan request, ServerCallContext context)
         {
-            logger.LogInformation($"Se quiere cerrar el prestamo de id {request.Id}");
+            logger.LogInformation($"Se quiere cerrar el prestamo de id {request.Id}"); 
 
             return Task.FromResult(new Response() { Status = "OK" });
         }
