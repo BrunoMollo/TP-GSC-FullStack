@@ -22,6 +22,9 @@ namespace TP_GSC_BackEnd.Entities
 
         public bool hasValidDescription() 
         {
+            if (Description is null)
+                return false;
+
             if (Description.Length.isBetweenExcluding(2, 100))
                 return true;
             else
