@@ -54,11 +54,14 @@ namespace TP_GSC_BackEnd.Data_Access
              .HasOne(t => t.Category);
 
 
+
+
         }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Person> People { get; set;  }
         public DbSet<Thing> Things { get; set; }
+        public DbSet<Loan> Loans { get; set; }
 
     }
 }

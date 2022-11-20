@@ -6,6 +6,7 @@ using TP_GSC_BackEnd.Dto;
 using TP_GSC_BackEnd.Extension_Methods;
 using TP_GSC_BackEnd.Handlers;
 using TP_GSC_BackEnd.Protos;
+using TP_GSC_BackEnd.Services.Loans;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,8 @@ builder.Services.AddGrpc(opt => {
     opt.EnableDetailedErrors = true;
 });
 builder.Services.AddGrpcReflection();
+
+builder.Services.AddScoped<ILoansService, LoansService>();
 
 
 

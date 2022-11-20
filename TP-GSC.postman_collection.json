@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "3aa9c34f-2553-4a9f-a1b4-d45de5959758",
 		"name": "TP-GSC",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24519800"
 	},
 	"item": [
 		{
@@ -181,7 +182,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Description\": \"mi cat\"\r\n}",
+							"raw": "{\r\n    \"Description\": \"Otros\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -189,7 +190,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:7193/api/categories/2",
+							"raw": "https://localhost:7193/api/categories/26",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -198,7 +199,7 @@
 							"path": [
 								"api",
 								"categories",
-								"2"
+								"26"
 							]
 						}
 					},
@@ -424,6 +425,40 @@
 								"api",
 								"users",
 								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Loans",
+			"item": [
+				{
+					"name": "/loans",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ThingId\":23,\r\n    \"PersonId\":50,\r\n    \"AgreedReturnDate\":\"2023-04-30T02:15:12.356Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7193/api/loans",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7193",
+							"path": [
+								"api",
+								"loans"
 							]
 						}
 					},
