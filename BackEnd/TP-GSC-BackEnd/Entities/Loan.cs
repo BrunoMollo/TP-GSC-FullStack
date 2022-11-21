@@ -29,6 +29,18 @@ namespace TP_GSC_BackEnd.Entities
             } 
         }
 
+        public bool isClosed() {
+            if (RealReturnDate is null)
+                return false;
+            else
+                return true;
+        }
+
+        public void Close() {
+            if (!isClosed()) { 
+                RealReturnDate=DateTime.Now;
+            }
+        }
 
 
 

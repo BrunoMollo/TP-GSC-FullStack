@@ -48,5 +48,22 @@ namespace TP_GSC_BackEnd.Services.Loans
 
 
 
+
+        public ServiceResult<Loan> close(int LoanId)
+        {
+            var loan=Uow.LoansRepo.GetOne(LoanId);
+            if (loan is null) 
+                return ServiceResult<Loan>.NotFound("Loan not found");
+
+            if (loan.isClosed())
+                return ServiceResult<Loan>.BussinesLogicError("Loan is already cloased");
+
+            loan.Close();
+            Uow.SaveChanges();
+
+            return ServiceResult<Loan>.Ok(loan);
+        }
+
+
     }
 }

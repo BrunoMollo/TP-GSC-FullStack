@@ -9,9 +9,10 @@
     }
 
     public record class ServiceResult<T>
+        where T : class, new()
     {
         public ServiceResultTypes type { get; private set; }
-        public T? body { get; private set; }
+        public T body { get; private set; }
         public string? error_message { get; private set;}
 
 
@@ -43,10 +44,18 @@
             return result;
         }
 
+        public bool isOK() {
+            return type == ServiceResultTypes.Ok;
+        }
+
 
         private ServiceResult(ServiceResultTypes type)
         {
-            this.type = type;            
+            this.type = type;
+            this.body = new T();
+            this.error_message = "";
         }
+
+
     }
 }

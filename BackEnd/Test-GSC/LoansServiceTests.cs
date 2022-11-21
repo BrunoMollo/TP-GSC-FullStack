@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
+using System.Security.Permissions;
 using TP_GSC_BackEnd.Data_Access.Uow;
 using TP_GSC_BackEnd.Dto.LoanDto;
 using TP_GSC_BackEnd.Entities;
@@ -119,6 +120,51 @@ namespace Test_GSC
 
 
 
+        [Fact]
+        public void should_not_close_a_loan_that_doesnt_exist() {
+            uow.Setup(u => u.LoansRepo.GetOne(It.IsAny<int>())).Returns<Loan>(null);
+            var target = new LoansService(uow.Object);
+
+            var result = target.close(It.IsAny<int>());
+
+            result.type.Should().Be(ServiceResultTypes.NotFound);
+            result.error_message.Should().NotBeNullOrWhiteSpace();
+            uow.Verify(u => u.SaveChanges(), Times.Never);
+        }
+
+        [Fact]
+        public void should_not_close_loan_that_is_already_closed() {
+
+            var dbLoan = new Loan()
+            {
+                RealReturnDate = DateTime.Now.AddDays(-1)
+            };
+            uow.Setup(u => u.LoansRepo.GetOne(It.IsAny<int>())).Returns(dbLoan);
+            var target = new LoansService(uow.Object);
+
+            var result = target.close(It.IsAny<int>());
+
+            result.type.Should().Be(ServiceResultTypes.BussinesLogicError);
+            result.error_message.Should().NotBeNullOrWhiteSpace();
+            uow.Verify(u => u.SaveChanges(), Times.Never);
+        }
+
+        [Fact]
+        public void should_close_loan_if_posible() {
+            var dbLoan = new Loan()
+            {
+                RealReturnDate = null
+            };
+            uow.Setup(u => u.LoansRepo.GetOne(It.IsAny<int>())).Returns(dbLoan);
+            var target = new LoansService(uow.Object);
+
+            var result = target.close(It.IsAny<int>());
+
+            result.type.Should().Be(ServiceResultTypes.Ok);
+            result.body.Should().NotBeNull().And.BeEquivalentTo(dbLoan);
+            uow.Verify(u => u.SaveChanges(), Times.Once);
+
+        }
 
 
 

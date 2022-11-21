@@ -9,6 +9,15 @@ namespace TP_GSC_BackEnd.Data_Access.LoanData
         {
         }
 
+        public override Loan? GetOne(int id)
+        {
+            return context.Loans
+                .Include(l => l.Thing)
+                .Include(l => l.Person)
+                .FirstOrDefault(l => l.Id == id);
+        }
+
+
         public List<Loan> GetPendingLoans()
         {
             return this.context.Loans

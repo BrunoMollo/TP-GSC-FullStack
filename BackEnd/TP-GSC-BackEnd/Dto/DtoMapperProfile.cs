@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Google.Protobuf.WellKnownTypes;
 using TP_GSC_BackEnd.Dto.CategotyDto;
+using TP_GSC_BackEnd.Dto.LoanDto;
 using TP_GSC_BackEnd.Dto.ThingDto;
 using TP_GSC_BackEnd.Entities;
+using TP_GSC_BackEnd.Protos;
 
 namespace TP_GSC_BackEnd.Dto
 {
@@ -15,6 +18,13 @@ namespace TP_GSC_BackEnd.Dto
 
             CreateMap<Thing, ShowThingDto>();
             CreateMap<CreateThingDto, Thing>();
+
+            CreateMap<Loan, ShowLoanDto>();
+
+
+            CreateMap<NewLoanRequest, CreateLoanDto>()
+                .ForMember(dto => dto.AgreedReturnDate, m => m.MapFrom(nlr => nlr.AgreedReturnDate.ToDateTime()));
+               
 
 
         }

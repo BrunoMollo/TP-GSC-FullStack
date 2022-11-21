@@ -5,18 +5,18 @@ option csharp_namespace = "TP_GSC_BackEnd.Protos";
 import "google/protobuf/timestamp.proto";
 
 service LoanGrpcGateway{
-	rpc initLoan(loanCreateRequest) returns (Response);
-	rpc closeLoan(LoanId) returns (Response);
+	rpc initLoan(NewLoanRequest) returns (Response);
+	rpc closeLoan(CloseLoanRequest) returns (Response);
 }
 
 
-message loanCreateRequest{
+message NewLoanRequest{
 	int32 personId=1;
 	int32 thingId=2;
 	google.protobuf.Timestamp AgreedReturnDate=3;
 }
 
-message LoanId{
+message CloseLoanRequest{
 	int32 id=1;
 }
 

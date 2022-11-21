@@ -5,9 +5,9 @@ namespace TP_GSC_BackEnd.Services.Loans
 {
     public interface ILoansService
     {
-        public ServiceResult<Loan> create(CreateLoanDto dto); 
-            
-        
+        public ServiceResult<Loan> create(CreateLoanDto dto);
+
+        public ServiceResult<Loan> close(int LoanId); 
        
 
 
