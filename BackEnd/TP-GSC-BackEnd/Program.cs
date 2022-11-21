@@ -37,7 +37,7 @@ builder.Services.AddGrpcReflection();
 
 builder.Services.AddScoped<ILoansService, LoansService>();
 
-
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -76,6 +76,7 @@ app.MapControllerRoute(
 
 app.MapGrpcService<LoansGrpc>();
 
-
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Run();
