@@ -21,17 +21,21 @@ namespace TP_GSC_BackEnd.Protos
         public override Task<Response> initLoan(NewLoanRequest request, ServerCallContext context)
         {
             var dto=mapper.Map<CreateLoanDto>(request);
-            var result=loansService.create(dto);
+            var result=loansService.Create(dto);
 
-            return Task.FromResult(new Response() {
-                Message=result.error_message });
+            return Task.FromResult(
+                new Response() 
+                {
+                    Message=result.error_message 
+                }
+            );
         }
 
 
 
         public override Task<Response> closeLoan(CloseLoanRequest request, ServerCallContext context)
         {
-            var result = loansService.close(request.Id);
+            var result = loansService.Close(request.Id);
 
             return Task.FromResult(
                 new Response()
@@ -40,6 +44,29 @@ namespace TP_GSC_BackEnd.Protos
                 }
             );
         }
+
+
+        public override Task<PendingLoansResponse> getPendingLoans(Void request, ServerCallContext context)
+        {
+            var result = loansService.GetPendingLoans().body.AsEnumerable();
+
+
+            var arr = result.Select(l => new PendingLoan() { Id = l.Id, PersonName = l.Person.Name, ThingDesc = l.Thing.Description });
+
+            var response= new PendingLoansResponse();
+            foreach (var loan in arr) {
+                response.Item.Add(loan);
+            }
+
+            return Task.FromResult(response);
+
+
+        }
+
+
+
+
+
 
 
 

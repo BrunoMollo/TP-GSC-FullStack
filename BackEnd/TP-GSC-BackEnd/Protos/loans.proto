@@ -7,6 +7,7 @@ import "google/protobuf/timestamp.proto";
 service LoanGrpcGateway{
 	rpc initLoan(NewLoanRequest) returns (Response);
 	rpc closeLoan(CloseLoanRequest) returns (Response);
+	rpc getPendingLoans(Void) returns (PendingLoansResponse);
 }
 
 
@@ -20,6 +21,19 @@ message CloseLoanRequest{
 	int32 id=1;
 }
 
+message PendingLoan{
+	int32 id=1;
+	string personName=2;
+	string thingDesc=3;
+}
+
+message PendingLoansResponse{
+	repeated PendingLoan item=1;
+}
+
+
 message Response{
 	string message=1;
 }
+
+message Void{}

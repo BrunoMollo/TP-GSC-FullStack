@@ -12,8 +12,9 @@ namespace TP_GSC_BackEnd.Data_Access.LoanData
         public override Loan? GetOne(int id)
         {
             return context.Loans
-                .Include(l => l.Thing)
                 .Include(l => l.Person)
+                .Include(l => l.Thing)
+                .Include(l=>l.Thing.Category)
                 .FirstOrDefault(l => l.Id == id);
         }
 
@@ -22,8 +23,9 @@ namespace TP_GSC_BackEnd.Data_Access.LoanData
         {
             return this.context.Loans
                 .Where(l => l.RealReturnDate == null)
-                .Include(l=>l.Thing)
-                .Include(l=>l.Person)
+                .Include(l => l.Person)
+                .Include(l => l.Thing)
+                .Include(l => l.Thing.Category)
                 .ToList();
         }
     }

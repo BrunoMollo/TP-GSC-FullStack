@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TP_GSC_BackEnd.Data_Access.Uow;
 using TP_GSC_BackEnd.Dto.LoanDto;
@@ -12,16 +13,18 @@ namespace TP_GSC_BackEnd.Controllers.API
     public class LoansController : ControllerBase
     {
         private ILoansService LoansService;
+        private IMapper mapper;
 
-        public LoansController(ILoansService loansService) { 
+        public LoansController(ILoansService loansService, IMapper mapper) { 
             this.LoansService = loansService;
+            this.mapper = mapper;
         }
 
 
         [HttpPost]
         public IActionResult createloan([FromBody]CreateLoanDto CreateLoanDto) {
            
-            var result=LoansService.create(CreateLoanDto);
+            var result=LoansService.Create(CreateLoanDto);
 
 
             switch (result.type) {
@@ -35,15 +38,41 @@ namespace TP_GSC_BackEnd.Controllers.API
                     return Conflict(result.error_message);
             }
 
-            return CreatedAtAction(nameof(getLoaById), new { Id = result.body.Id }, result.body);
+            var arr = result.body;
+            var dto = mapper.Map<ShowLoanDto>(arr);
+
+            return CreatedAtAction(nameof(getLoanById), new { Id = dto.Id }, dto);
         
         }
 
         [HttpGet("{id}")]
-        public IActionResult getLoaById(int id) {
+        public IActionResult getLoanById(int id) {
             throw new NotImplementedException();
         }
 
+
+        [HttpGet("pending")]
+        public IActionResult getPendingLoans() {
+            var result=LoansService.GetPendingLoans();
+            var arr = result.body.ToArray();
+            var dto = mapper.Map<ShowLoanDto[]>(arr);
+            return Ok(dto);
+        }
+
+
+        [HttpPost("close/{id}")]
+        public IActionResult closeLoan(int id) {
+            var result=LoansService.Close(id);
+
+            if(result.isNotFound())
+                 return NotFound(result.error_message);
+
+            if (result.isBussinesLogicError())
+                return Conflict(result.error_message);
+
+            return NoContent();
+        
+        }
 
 
 

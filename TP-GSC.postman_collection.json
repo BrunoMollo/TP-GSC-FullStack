@@ -153,7 +153,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Description\": \"mi categoria\"\r\n}",
+							"raw": "{\r\n    \"Description\": \"mi categoria221\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -459,6 +459,70 @@
 							"path": [
 								"api",
 								"loans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/loans/pending",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ThingId\":23,\r\n    \"PersonId\":50,\r\n    \"AgreedReturnDate\":\"2023-04-30T02:15:12.356Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7193/api/loans/pending",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7193",
+							"path": [
+								"api",
+								"loans",
+								"pending"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/loans/close/1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ThingId\":23,\r\n    \"PersonId\":50,\r\n    \"AgreedReturnDate\":\"2023-04-30T02:15:12.356Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7193/api/loans/close/8",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7193",
+							"path": [
+								"api",
+								"loans",
+								"close",
+								"8"
 							]
 						}
 					},

@@ -14,7 +14,7 @@ namespace TP_GSC_BackEnd.Services.Loans
         }
 
 
-        public ServiceResult<Loan> create(CreateLoanDto dto) {
+        public ServiceResult<Loan> Create(CreateLoanDto dto) {
 
             if (dto.AgreedReturnDate < DateTime.Now)
                 return ServiceResult<Loan>.InvalidInput("invalid Date");
@@ -43,13 +43,13 @@ namespace TP_GSC_BackEnd.Services.Loans
             Uow.LoansRepo.add(newLoan);
             Uow.SaveChanges();
 
-            return ServiceResult<Loan>.Ok();
+            return ServiceResult<Loan>.Ok(newLoan);
         }
 
 
 
 
-        public ServiceResult<Loan> close(int LoanId)
+        public ServiceResult<Loan> Close(int LoanId)
         {
             var loan=Uow.LoansRepo.GetOne(LoanId);
             if (loan is null) 
@@ -64,6 +64,10 @@ namespace TP_GSC_BackEnd.Services.Loans
             return ServiceResult<Loan>.Ok(loan);
         }
 
-
+        public ServiceResult<List<Loan>> GetPendingLoans()
+        {
+            var loans = Uow.LoansRepo.GetPendingLoans();
+            return ServiceResult<List<Loan>>.Ok(loans);
+        }
     }
 }

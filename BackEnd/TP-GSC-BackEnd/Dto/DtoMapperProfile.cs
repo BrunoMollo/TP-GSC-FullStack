@@ -19,11 +19,12 @@ namespace TP_GSC_BackEnd.Dto
             CreateMap<Thing, ShowThingDto>();
             CreateMap<CreateThingDto, Thing>();
 
-            CreateMap<Loan, ShowLoanDto>();
+            CreateMap<Loan, ShowLoanDto>()
+                .ForMember(dto => dto.Status, m => m.MapFrom(src => src.Status.Description));
 
 
             CreateMap<NewLoanRequest, CreateLoanDto>()
-                .ForMember(dto => dto.AgreedReturnDate, m => m.MapFrom(nlr => nlr.AgreedReturnDate.ToDateTime()));
+                .ForMember(dto => dto.AgreedReturnDate, m => m.MapFrom(src => src.AgreedReturnDate.ToDateTime()));
                
 
 

@@ -27,7 +27,7 @@ namespace Test_GSC
             };
 
             foreach(var dto in exaples_list) {
-                var result = target.create(dto);
+                var result = target.Create(dto);
 
                 result.type.Should().Be(ServiceResultTypes.InvalidInput);
                 uow.Verify(u => u.SaveChanges(), Times.Never);
@@ -42,7 +42,7 @@ namespace Test_GSC
             var target = new LoansService(uow.Object);
 
             var dto = new CreateLoanDto() { ThingId = 1, AgreedReturnDate=DateTime.Now.AddDays(2) };
-            var result = target.create(dto);
+            var result = target.Create(dto);
 
             result.type.Should().Be(ServiceResultTypes.NotFound);
             uow.Verify(u => u.SaveChanges(), Times.Never);
@@ -56,7 +56,7 @@ namespace Test_GSC
             var target = new LoansService(uow.Object);
 
             var dto = new CreateLoanDto() { PersonId = 20, AgreedReturnDate = DateTime.Now.AddDays(2) };
-            var result = target.create(dto);
+            var result = target.Create(dto);
 
             result.type.Should().Be(ServiceResultTypes.NotFound);
             uow.Verify(u => u.SaveChanges(), Times.Never);
@@ -82,7 +82,7 @@ namespace Test_GSC
             var target = new LoansService(uow.Object);
 
             var dto = new CreateLoanDto() { ThingId = 1, PersonId=20, AgreedReturnDate = DateTime.Now.AddDays(2) };
-            var result = target.create(dto);
+            var result = target.Create(dto);
 
             result.type.Should().Be(ServiceResultTypes.BussinesLogicError);
             uow.Verify(u => u.SaveChanges(), Times.Never);
@@ -108,7 +108,7 @@ namespace Test_GSC
             var target = new LoansService(uow.Object);
 
             var dto = new CreateLoanDto() { ThingId = 99, PersonId = 20, AgreedReturnDate = DateTime.Now.AddDays(2) };
-            var result = target.create(dto);
+            var result = target.Create(dto);
 
             result.type.Should().Be(ServiceResultTypes.Ok);
             uow.Verify(u => u.LoansRepo.add(It.IsAny<Loan>()), Times.Once);
@@ -125,7 +125,7 @@ namespace Test_GSC
             uow.Setup(u => u.LoansRepo.GetOne(It.IsAny<int>())).Returns<Loan>(null);
             var target = new LoansService(uow.Object);
 
-            var result = target.close(It.IsAny<int>());
+            var result = target.Close(It.IsAny<int>());
 
             result.type.Should().Be(ServiceResultTypes.NotFound);
             result.error_message.Should().NotBeNullOrWhiteSpace();
@@ -142,7 +142,7 @@ namespace Test_GSC
             uow.Setup(u => u.LoansRepo.GetOne(It.IsAny<int>())).Returns(dbLoan);
             var target = new LoansService(uow.Object);
 
-            var result = target.close(It.IsAny<int>());
+            var result = target.Close(It.IsAny<int>());
 
             result.type.Should().Be(ServiceResultTypes.BussinesLogicError);
             result.error_message.Should().NotBeNullOrWhiteSpace();
@@ -158,7 +158,7 @@ namespace Test_GSC
             uow.Setup(u => u.LoansRepo.GetOne(It.IsAny<int>())).Returns(dbLoan);
             var target = new LoansService(uow.Object);
 
-            var result = target.close(It.IsAny<int>());
+            var result = target.Close(It.IsAny<int>());
 
             result.type.Should().Be(ServiceResultTypes.Ok);
             result.body.Should().NotBeNull().And.BeEquivalentTo(dbLoan);
