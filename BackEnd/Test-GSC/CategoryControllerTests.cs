@@ -102,12 +102,13 @@ namespace Test_GSC
         public void addCategory_should_add_category_with_valid_descrition_and_not_repeted(string valid_description) {
             mapper.Setup(m => m.Map<Category>(It.IsAny<CreateCategoryDto>())).Returns(new Category() { Description = valid_description });
             uow.Setup(u => u.CategoryRepo.add(It.IsAny<Category>())).Returns(new Category());
+            mapper.Setup(m => m.Map<ShowCategoryDto>(It.IsAny<Category>())).Returns(new ShowCategoryDto() { Id = 1, Description = "dewdew" });
 
             var target = new CategoriesController(uow.Object, mapper.Object);
 
             var result = target.addCategory(new CreateCategoryDto());
 
-            result.Should().BeOfType<CreatedResult>();
+            result.Should().BeOfType<CreatedAtActionResult>();
             uow.Verify(u => u.SaveChanges(), Times.Exactly(1));
 
         }

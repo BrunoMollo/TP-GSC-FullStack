@@ -62,7 +62,7 @@ namespace TP_GSC_BackEnd.Controllers.API
             Uow.SaveChanges();
 
             var createdThingDto = mapper.Map<ShowThingDto>(createdThing);
-            return Created("uri??", createdThingDto);
+            return CreatedAtAction(nameof(GetThingById), new { Id = createdThingDto.Id }, createdThingDto);
         }
 
 

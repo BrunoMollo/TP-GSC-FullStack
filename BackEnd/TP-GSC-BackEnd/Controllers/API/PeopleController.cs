@@ -49,7 +49,7 @@ namespace TP_GSC_BackEnd.Controllers.API
             
             newPerson = Uow.PeopleRepo.add(newPerson);
             Uow.SaveChanges();
-            return Created("uri??", newPerson);
+            return CreatedAtAction(nameof(getOnePerson), new { Id = newPerson.Id }, newPerson);
         }
 
 

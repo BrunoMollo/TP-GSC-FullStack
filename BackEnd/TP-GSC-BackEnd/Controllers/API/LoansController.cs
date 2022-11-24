@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TP_GSC_BackEnd.Data_Access.Uow;
 using TP_GSC_BackEnd.Dto.LoanDto;
 using TP_GSC_BackEnd.Services;
 using TP_GSC_BackEnd.Services.Loans;
@@ -34,8 +35,13 @@ namespace TP_GSC_BackEnd.Controllers.API
                     return Conflict(result.error_message);
             }
 
-            return NoContent();
+            return CreatedAtAction(nameof(getLoaById), new { Id = result.body.Id }, result.body);
         
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult getLoaById(int id) {
+            throw new NotImplementedException();
         }
 
 

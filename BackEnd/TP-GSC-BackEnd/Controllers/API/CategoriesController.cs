@@ -58,7 +58,8 @@ namespace TP_GSC_BackEnd.Controllers.API
                 Uow.SaveChanges();
 
                 var createdCategoryDto = mapper.Map<ShowCategoryDto>(newCategory);
-                return Created("uri??", createdCategoryDto);
+                return CreatedAtAction(nameof(getCategoryById),new {Id=createdCategoryDto.Id},createdCategoryDto);
+                
             }
             catch (DbUpdateException ex)
             {
