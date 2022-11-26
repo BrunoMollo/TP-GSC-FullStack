@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EMPTY, filter, map, Observable, partition } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { PeopleApiService } from '../peoleApi/people-api.service';
 import { Person } from '../person';
 
@@ -18,6 +18,7 @@ export class ListPeopleComponent implements OnInit {
 
   ngOnInit() {
     this.allPeople= this.peopleApi.RequestAll()
+    setTimeout(this.refreshList.bind(this),600)
   }
 
   delete(person:Person){
