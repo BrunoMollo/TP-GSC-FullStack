@@ -5,7 +5,6 @@ using TP_GSC_BackEnd.Data_Access.Uow;
 using TP_GSC_BackEnd.Dto;
 using TP_GSC_BackEnd.Extension_Methods;
 using TP_GSC_BackEnd.Handlers;
-using TP_GSC_BackEnd.Protos;
 using TP_GSC_BackEnd.Services.Loans;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -74,7 +73,6 @@ app.MapControllerRoute(
        pattern: "{controller}/{action=Index}/{id?}");
 
 
-app.MapGrpcService<LoansGrpc>();
 
 app.UseSwagger();
 app.UseSwaggerUI();
